@@ -11,7 +11,29 @@ echo "keine Informationen verfügbar"
 echo "Bereitstellen des Grundsystems"
 vagrant box add ubuntu/trusty64
 
-# @todo Auswahlliste der Funktionen 
-# Mögliche Funktionen sind z.B. 
-# Start, Reload, Provision, Shutdown, Suspend, Destroy, Command Line
-echo "Ausgabe der Funktions-Auswahl (todo)"
+# Funktions-Auswahl
+PS3='Was möchtest du tun? '
+options=(
+  "VM starten"
+  "VM neu laden"
+  "VM stoppen"
+  "Abbrechen"
+)
+select opt in "${options[@]}"
+do
+    case $opt in
+        "VM starten")
+            echo "@todo VM starten"
+            ;;
+        "VM neu laden")
+            echo "@todo VM neu laden"
+            ;;
+        "VM stoppen")
+            echo "@todo VM stoppen"
+            ;;
+        "Abbrechen")
+            break
+            ;;
+        *) echo "Ungültige Eingabe";;
+    esac
+done
