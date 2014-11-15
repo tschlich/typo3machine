@@ -17,18 +17,21 @@ cd vagrant
 # Funktions-Auswahl
 PS3='Was möchtest du tun? '
 options=(
+  "Abbrechen"
   "VM starten - up"
   "VM neu laden - reload"
   "VM aktualisieren - provision"
   "VM beenden - halt"
-  "VM pausieren - suspend"
+#  "VM pausieren - suspend"
   "SSH-Zugang - ssh"
   "VM löschen - destroy"
-  "Abbrechen"
 )
 select opt in "${options[@]}"
 do
     case $opt in
+        "Abbrechen")
+            break
+            ;;
         "VM starten - up")
             vagrant up
             ;;
@@ -41,17 +44,14 @@ do
         "VM beenden - halt")
             vagrant halt
             ;;
-        "VM pausieren - suspend")
-            vagrant suspend
-            ;;
+ #       "VM pausieren - suspend")
+ #           vagrant suspend
+ #           ;;
         "SSH-Zugang - ssh")
             vagrant ssh
             ;;
         "VM löschen - destroy")
             vagrant destroy
-            ;;
-        "Abbrechen")
-            break
             ;;
         *) echo "Ungültige Eingabe";;
     esac
