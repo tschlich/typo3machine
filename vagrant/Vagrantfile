@@ -6,11 +6,20 @@ VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
-  # Every Vagrant virtual environment requires a box to build off of.
+  ### Virtual Machine ###
+  #
+  ## Base System
   config.vm.box = "ubuntu/trusty64"
+  ## Settings
+  config.vm.provider "virtualbox" do |v|
+    # RAM
+    v.customize ["modifyvm", :id, "--memory", 2048]
+    # CPU Cores
+    v.customize ["modifyvm", :id, "--cpus", 2]
+  end
 
 
-  ## Configuring Provisioning
+  ## Provisioning
   # Adding Bootstrap for automated installation on first Start
   config.vm.provision :shell, path: "bootstrap.sh" 
 
