@@ -19,6 +19,7 @@ PS3='Was möchtest du tun? '
 options=(
   "VM starten - up"
   "VM neu laden - reload"
+  "VM aktualisieren - provision"
   "VM beenden - halt"
   "VM pausieren - suspend"
   "SSH-Zugang - ssh"
@@ -33,6 +34,9 @@ do
             ;;
         "VM neu laden - reload")
             vagrant reload
+            ;;
+        "VM aktualisieren - provision")
+            vagrant provision
             ;;
         "VM beenden - halt")
             vagrant halt
