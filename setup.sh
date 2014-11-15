@@ -13,7 +13,12 @@ echo "Bereitstellen des Grundsystems"
 
 # In Vagrant-Root-Verzeichnis wechseln
 cd vagrant
-
+echo " _   _               _           _   _____     _ _     _   "
+echo "| |_| |__   ___  ___| |__       | |_|___ /  __| (_)___| |_ "
+echo "| __| '_ \ / _ \/ __| '_ \ _____| __| |_ \ / _\` | / __| __|"
+echo "| |_| | | | (_) \__ \ | | |_____| |_ ___) | (_| | \__ \ |_ "
+echo " \__|_| |_|\___/|___/_| |_|      \__|____/ \__,_|_|___/\__|"
+echo ""
 # Funktions-Auswahl
 PS3='Was möchtest du tun? (Enter für Menü) '
 options=(
