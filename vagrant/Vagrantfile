@@ -5,15 +5,17 @@
 VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
-  # All Vagrant configuration is done here. The most common configuration
-  # options are documented and commented below. For a complete reference,
-  # please see the online documentation at vagrantup.com.
 
   # Every Vagrant virtual environment requires a box to build off of.
   config.vm.box = "ubuntu/trusty64"
 
-  # Tell Vagrant to use the shell provisioner to setup the machine
-  config.vm.provision :shell, path: "bootstrap.sh"
+  ## Configuring Provisioning
+
+  # Adding Bootstrap for automated installation on first Start
+  config.vm.provision :shell, path: "bootstrap.sh" 
+
+  # Adds the Script after-boot.sh to be run on each System Start
+  config.vm.provision "shell", path: "afterBoot.sh", run: "always"
 
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
