@@ -8,7 +8,8 @@ Workflows zum Entwickeln von Webseiten.
     |_ README.md              // Projekt-Informationen (diese Datei)
     |_ setup.sh               // Shell-Skript zum Einrichten des Projekts
     |_ vagrant/               // Vagrant-Verzeichnis
-      |_ bootstrap.sh         // Aktionen innerhalb der VM
+      |_ afterBootstrap.sh    // Aktionen nach jedem Systemboot
+      |_ bootstrap.sh         // Aktionen nach dem 1. Systemboot oder "vagrant provision"
       |_ Vagrantfile          // Der Bauplan der VM
       |_                      // 
       |_                      // 
