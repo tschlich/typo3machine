@@ -4,17 +4,31 @@ Workflows zum Entwickeln von Webseiten.
  
 ## Projektdateien
 
-    WebEntwicklung            // Projekt-Verzeichnis 
-    |_ README.md              // Projekt-Informationen (diese Datei)
-    |_ setup.sh               // Shell-Skript zum Einrichten des Projekts
-    |_ vagrant/               // Vagrant-Verzeichnis
-      |_ afterBootstrap.sh    // Aktionen nach jedem Systemboot
-      |_ bootstrap.sh         // Aktionen nach dem 1. Systemboot oder "vagrant provision"
-      |_ Vagrantfile          // Der Bauplan der VM
-      |_                      // 
-      |_                      // 
-      |_                      // 
-      |_                      // 
+   + WebEntwicklung/          // Projekt-Verzeichnis 
+    |
+    |- README.md              // Projekt-Informationen (diese Datei)
+    |
+    |- setup.sh               // Shell-Skript zum Einrichten des Projekts
+    |
+    |-+ vagrant/               // Vagrant-Verzeichnis
+    | |
+    | |- afterBootstrap.sh    // Aktionen nach jedem Systemboot
+    | |
+    | |- bootstrap.sh         // Aktionen nach dem 1. Systemboot oder "vagrant provision"
+    | |
+    | |- Vagrantfile          // Der Bauplan der VM
+    | |
+    | |-+ vhosts               // Gemeinsamer Ordner: /etc/apache2/sites-available
+    | | |
+    | | +- test1.conf         // vhost-Konfiguration
+    | | 
+    | |-+ htdocs               // Gemeinsamer Ordner: /var/www/htdocs
+    | | |
+    | | |- index.php          // Symlink
+    | | |
+    | | |- typo3              // Symlink
+    | | |
+    | | +- typo3_src          // Symlink
 
 Dieser "Bauplan" ist unter Versionskontrolle (git).
 
