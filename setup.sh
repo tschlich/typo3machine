@@ -18,12 +18,12 @@ cd vagrant
 PS3='Was möchtest du tun? '
 options=(
   "Abbrechen"
+  "SSH-Zugang - ssh"
   "VM starten - up"
   "VM neu laden - reload"
   "VM aktualisieren - provision"
   "VM beenden - halt"
 #  "VM pausieren - suspend"
-  "SSH-Zugang - ssh"
   "VM löschen - destroy"
 )
 select opt in "${options[@]}"
@@ -31,6 +31,9 @@ do
     case $opt in
         "Abbrechen")
             break
+            ;;
+        "SSH-Zugang - ssh")
+            vagrant ssh
             ;;
         "VM starten - up")
             vagrant up
@@ -47,9 +50,6 @@ do
  #       "VM pausieren - suspend")
  #           vagrant suspend
  #           ;;
-        "SSH-Zugang - ssh")
-            vagrant ssh
-            ;;
         "VM löschen - destroy")
             vagrant destroy
             ;;
