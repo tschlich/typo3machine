@@ -9,27 +9,42 @@ echo "keine Informationen verfügbar"
 # @todo Erwirkt einen Fehler, wenn die Box schon bereitgestellt wurde
 #       Besser Textmeldung oder unterdrücken
 echo "Bereitstellen des Grundsystems"
-vagrant box add ubuntu/trusty64
+#vagrant box add ubuntu/trusty64
+
+# In Vagrant-Root-Verzeichnis wechseln
+cd vagrant
 
 # Funktions-Auswahl
 PS3='Was möchtest du tun? '
 options=(
-  "VM starten"
-  "VM neu laden"
-  "VM stoppen"
+  "VM starten - up"
+  "VM neu laden - reload"
+  "VM beenden - halt"
+  "VM pausieren - suspend"
+  "SSH-Zugang - ssh"
+  "VM löschen - destroy"
   "Abbrechen"
 )
 select opt in "${options[@]}"
 do
     case $opt in
-        "VM starten")
-            echo "@todo VM starten"
+        "VM starten - up")
+            vagrant up
             ;;
-        "VM neu laden")
-            echo "@todo VM neu laden"
+        "VM neu laden - reload")
+            vagrant reload
             ;;
-        "VM stoppen")
-            echo "@todo VM stoppen"
+        "VM beenden - halt")
+            vagrant halt
+            ;;
+        "VM pausieren - suspend")
+            vagrant suspend
+            ;;
+        "SSH-Zugang - ssh")
+            vagrant ssh
+            ;;
+        "VM löschen - destroy")
+            vagrant destroy
             ;;
         "Abbrechen")
             break
