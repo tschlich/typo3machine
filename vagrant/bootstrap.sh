@@ -14,7 +14,7 @@ ln -fs /vagrant /var/www
 
 # Apache2 default webroot-Verzeichnis erstellen
 # @todo evtl. vhost erstellen
-mkdir /var/www/html
+mkdir -p /var/www/html
 cd /var/www/html
 
 # Testseite erstellen, aufrufen und löschen
