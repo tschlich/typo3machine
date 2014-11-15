@@ -15,7 +15,7 @@ echo "Bereitstellen des Grundsystems"
 cd vagrant
 
 # Funktions-Auswahl
-PS3='Was möchtest du tun? '
+PS3='Was möchtest du tun? (Enter für Menü) '
 options=(
   "Abbrechen"
   "SSH-Zugang - ssh"
