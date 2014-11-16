@@ -53,6 +53,37 @@ echo 'phpmyadmin phpmyadmin/reconfigure-webserver multiselect apache2' | debconf
 # Install phpmyadmin with noninteractive mode (it will use the set settings)
 apt-get install -q -y phpmyadmin
 
+echo "### Installiere Typo3"
+cd //var/www
+if [ -d typo3_src-6.2.6 ]
+  then
+    echo "Typo3-Quellcode vorhanden"
+    # @todo check md5 or similar
+  else
+    echo "### Lade Typo3-Paket (current 6.2) ..."
+    wget -q http://get.typo3.org/6.2
+    echo "### Entpacke Typo3-Paket ..."
+    tar -xzf 6.2
+    rm 6.2
+fi
+
+echo "### Erstelle Symlinks"
+# Webroot zurücksetzen
+#rm -R html
+#mkdir html
+cd /vagrant/html
+ln -s ../typo3_src-6.2.* typo3_src
+ln -s typo3_src/index.php index.php
+ln -s typo3_src/typo3 typo3
+# Datei .htaccess bereitstellen wenn nicht vorhanden
+if [ -f .htaccess ]
+  then
+    echo ".htaccess vorhanden"
+  else
+    cp typo3_src/_.htaccess .htaccess
+    echo ".htaccess bereitstellen"
+fi
+
 ### User Config
 # Adding User dev and make him member of the Groups vagrant and admin
 # change password of user dev to dev
@@ -65,3 +96,4 @@ echo "### Dateirechte einstellen (/var/www/)"
 chown -R www-data:www-data /var/www
 chmod -R ugo-rwx /var/www
 chmod -R ug+rwX /var/www
+usermod -a -G www-data vagrant
