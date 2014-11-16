@@ -6,13 +6,13 @@ apt-get update
 echo "### Apache installieren:"
 apt-get install -y apache2
 
+echo "### entferne html-Dummy"
+rm /var/www/html/index.html
+
 # Eintrag in der hosts-Datei des Hostsystems nicht vergessen!
 echo "### Aktiviere vhost"
 a2ensite thosh-t3dist
 # @todo SSL https://
-
-echo "### index.html löschen"
-rm /var/www/html/index.html
 
 echo "### Installiere MySQL"
 # Setting the noninteractive Mode
