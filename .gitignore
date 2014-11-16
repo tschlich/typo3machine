@@ -1,2 +1,3 @@
-vagrant/html/
-
+typo3_src*/
+vagrant/vhosts/000-default.conf
+vagrant/vhosts/default-ssl.conf

@@ -29,7 +29,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     owner: "root", group: "root"
 
   # Create a Sync Folder "www" for the VM Dir /var/www with owner www-data
-  config.vm.synced_folder "htdocs/", "/var/www/html",
+  config.vm.synced_folder "html/", "/var/www/html",
     owner: "www-data", group: "www-data"
 
   ### Provisioning
