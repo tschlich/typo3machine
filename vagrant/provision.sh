@@ -52,3 +52,16 @@ echo 'phpmyadmin phpmyadmin/mysql/app-pass password root' | debconf-set-selectio
 echo 'phpmyadmin phpmyadmin/reconfigure-webserver multiselect apache2' | debconf-set-selections
 # Install phpmyadmin with noninteractive mode (it will use the set settings)
 apt-get install -q -y phpmyadmin
+
+### User Config
+# Adding User dev and make him member of the Groups vagrant and admin
+# change password of user dev to dev
+# Create symlink to /vagrant in home dir of dev
+#useradd -G vagrant,admin -m -s /bin/bash dev
+#echo "dev:dev" | chpasswd
+#ln -fs /vagrant /home/dev/vagrant-folder
+
+echo "### Dateirechte einstellen (/var/www/)"
+chown -R www-data:www-data /var/www
+chmod -R ugo-rwx /var/www
+chmod -R ug+rwX /var/www
