@@ -2,13 +2,11 @@
 echo "Vagrant-Projekt wird erstellt"
 
 # @todo Testen, ob Vagrant installiert ist, sonst Abbruch mit Fehlermeldung
-echo "Vagrant-Verfügbarkeit prüfen"
-echo "todo"
+#echo "Vagrant-Verfügbarkeit prüfen"
 
+#@todo uncomment
 # Basissystem auf dem Host bereitstellen 
-# @todo Erwirkt einen Fehler, wenn die Box schon bereitgestellt wurde
-#       Besser Textmeldung oder unterdrücken
-echo "Bereitstellen des Grundsystems"
+#echo "Bereitstellen des Grundsystems"
 #vagrant box add ubuntu/trusty64
 
 # In Vagrant-Root-Verzeichnis wechseln
