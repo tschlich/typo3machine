@@ -78,7 +78,7 @@ ln -s typo3_src/typo3 typo3
 # Datei .htaccess bereitstellen wenn nicht vorhanden
 if [ -f .htaccess ]
   then
-    echo ".htaccess vorhanden"
+    echo ".htaccess bereits vorhanden"
   else
     cp typo3_src/_.htaccess .htaccess
     echo ".htaccess bereitstellen"
