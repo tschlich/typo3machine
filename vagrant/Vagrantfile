@@ -32,18 +32,12 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.synced_folder "htdocs/", "/var/www/html",
     owner: "www-data", group: "www-data"
 
-
-
-
-
-
-
   ### Provisioning
-  #
-  ## Adding Bootstrap for automated installation on first Start
-  config.vm.provision :shell, path: "bootstrap.sh" 
-  #
-  ## Adding Script afterBoot.sh to be run on each System Start
+
+  # Adding Bootstrap for automated installation on first Start
+  config.vm.provision :shell, path: "provision.sh" 
+  
+  # Adding Script afterBoot.sh to be run on each System Start
   config.vm.provision "shell", path: "afterBoot.sh", run: "always"
 
 
