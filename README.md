@@ -74,12 +74,14 @@ Installation unter Verwendung des Setup-Skripts:
         touch /vagrant/html/FIRST_INSTALL
 
 
-
-
 ### Todo
 - Distribution-Extension "thosh-t3dist" (evtl. auf bootstrap_package basierend)
 - Git-Versionierung der Typo3-Distribution "thosh-t3dist"
 - Git-Versionierung des zu erstellenden Web-Projekts (quasi das Produkt des Vagrant-Projekts)
 - Einsatz von Bower als Paketmanager?
 - Einsatz von Grunt als Taskmanager?
+- LESS / SASS
+- jQuery
+- bootstrap
+- nodeJS
 - Checken: chef, puppet, Capistrano, ...
