@@ -80,8 +80,8 @@ if [ -f .htaccess ]
   then
     echo ".htaccess bereits vorhanden"
   else
-    cp typo3_src/_.htaccess .htaccess
     echo ".htaccess bereitstellen"
+    cp typo3_src/_.htaccess .htaccess
 fi
 
 ### User Config
