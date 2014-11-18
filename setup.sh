@@ -23,7 +23,7 @@ options=(
   "Abbrechen"
   "SSH-Zugang - ssh"
   "VM starten - up"
-  "VM neu laden - reload"
+  "VM neustarten - reload"
   "VM aktualisieren - provision"
   "VM beenden - halt"
 #  "VM pausieren - suspend"
