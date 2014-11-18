@@ -86,6 +86,7 @@ fi
 
 ### User Config
 # Adding User dev and make him member of the Groups vagrant and admin
+useradd -G vagrant,admin,www-data -m -s /bin/bash dev
 # change password of user dev to dev
 echo "dev:dev" | chpasswd
 #  Adding existing user vagrant to group www-data
@@ -95,4 +96,3 @@ echo "### Dateirechte einstellen (/var/www/)"
 chown -R www-data:www-data /var/www
 chmod -R ugo-rwx /var/www
 chmod -R ug+rwX /var/www
-usermod -a -G www-data vagrant
