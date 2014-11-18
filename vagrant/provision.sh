@@ -96,3 +96,24 @@ echo "### Dateirechte einstellen (/var/www/)"
 chown -R www-data:www-data /var/www
 chmod -R ugo-rwx /var/www
 chmod -R ug+rwX /var/www
+
+echo "### Installiere nodejs"
+
+# install PPA in order to get access to its contents
+curl -sL https://deb.nodesource.com/setup | sudo bash -
+
+# The PPA will be added to your configuration and your local package cache 
+# will be updated automatically. 
+# After running the setup script from nodesource, you can install the Node.js
+# package in the same way that you did above
+sudo apt-get install -y nodejs
+
+# The nodejs package contains the nodejs binary as well as npm, so you don't 
+# need to install npm separately. 
+# However, in order for some npm packages to work (such as those that require 
+# building from source), you will need to install the build-essentials package:
+sudo apt-get install -y build-essential
+
+echo "### Installiere Bower Web Package Manager" 
+npm install -g bower
+
