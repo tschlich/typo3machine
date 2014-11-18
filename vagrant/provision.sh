@@ -87,10 +87,9 @@ fi
 ### User Config
 # Adding User dev and make him member of the Groups vagrant and admin
 # change password of user dev to dev
-# Create symlink to /vagrant in home dir of dev
-#useradd -G vagrant,admin -m -s /bin/bash dev
-#echo "dev:dev" | chpasswd
-#ln -fs /vagrant /home/dev/vagrant-folder
+echo "dev:dev" | chpasswd
+#  Adding existing user vagrant to group www-data
+usermod -a -G www-data vagrant
 
 echo "### Dateirechte einstellen (/var/www/)"
 chown -R www-data:www-data /var/www
