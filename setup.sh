@@ -41,7 +41,7 @@ do
         "VM starten - up")
             vagrant up
             ;;
-        "VM neu laden - reload")
+        "VM neustarten - reload")
             vagrant reload
             ;;
         "VM aktualisieren - provision")
