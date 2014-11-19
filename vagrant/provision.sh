@@ -134,6 +134,23 @@ chmod -R ug+rwX /var/www/html
 fi
 
 
+# start testing
+
+cd /var/www/html
+
+# @todo Problems with group rights,  on OSX the shared folder on the host needs 
+# to get fixed after every bower package install in bower_components
+# admin rights seems to be ok for store in vagrantFolder (see t3source)
+echo "### loading jQuery" 
+sudo -H -u dev bower install jquery
+
+echo "###  Loading Twitter Bootstrap Framework" 
+#sudo -H -u dev bower install bootstrap
+
+echo "###  Loading Twitter Bootstrap Framework" 
+#sudo -H -u dev bower install modernizr
+
+# end testing 
 echo "### Installation/Provisioning finished"
 finishTime=$(date +%s)
 executionTimeSec=$((finishTime - startTime))
