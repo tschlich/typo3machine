@@ -66,6 +66,8 @@ if [ -d typo3_src-6.2.6 ]
     tar -xzf 6.2
     rm 6.2
 fi
+# execution time start
+startTime=$(date +%s)
 
 echo "### Erstelle Symlinks"
 # Webroot zurücksetzen
@@ -117,3 +119,8 @@ sudo apt-get install -y build-essential
 echo "### Installiere Bower Web Package Manager" 
 npm install -g bower
 
+echo "### Installation/Provisioning finished"
+finishTime=$(date +%s)
+executionTimeSec=$((finishTime - startTime))
+executionTime=$(date -u -d @${executionTimeSec} +"%T")
+echo "Execution time: $executionTime hh:mm:ss"
