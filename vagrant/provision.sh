@@ -78,10 +78,7 @@ if [ -f $FlagInstalled ]
     fi
 
     echo "### Erstelle Symlinks"
-    # Webroot zurücksetzen
-    #rm -R html
-    #mkdir html
-    cd /vagrant/html
+    cd /var/www/html
     ln -s ../typo3_src-6.2.* typo3_src
     ln -s typo3_src/index.php index.php
     ln -s typo3_src/typo3 typo3
