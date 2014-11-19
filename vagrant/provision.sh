@@ -4,8 +4,8 @@
 startTime=$(date +%s)
 
 # speed up provisioning for development
-flagInstalled="/vagrant/flagInstalled"
-if [ -f $FlagInstalled ]
+flagInstalled="/var/www/flagInstalled"
+if [ -f $flagInstalled ]
   then
     echo "System wurde bereits installiert"
   else
@@ -64,7 +64,7 @@ if [ -f $FlagInstalled ]
     apt-get install -q -y phpmyadmin
 
     echo "### Installiere Typo3"
-    cd /var/www
+    cd /vagrant
     if [ -d typo3_src-6.2.6 ]
       then
         echo "Typo3-Quellcode vorhanden"
@@ -78,7 +78,7 @@ if [ -f $FlagInstalled ]
     fi
 
     echo "### Erstelle Symlinks"
-    cd /var/www/html
+    cd /vagrant/html
     ln -s ../typo3_src-6.2.* typo3_src
     ln -s typo3_src/index.php index.php
     ln -s typo3_src/typo3 typo3
@@ -100,10 +100,13 @@ if [ -f $FlagInstalled ]
 
     #  Adding existing user vagrant to group www-data
     usermod -a -G www-data vagrant
-
-    chown -R www-data:www-data /var/www
-    chmod -R ugo-rwx /var/www
-    chmod -R ug+rwX /var/www
+# @todo check rights
+#    chown -R www-data:www-data /var/www
+#    chmod -R ugo-rwx /var/www
+#    chmod -R ug+rwX /var/www
+chown -R www-data:www-data /var/www/html
+chmod -R ugo-rwx /var/www/html
+chmod -R ug+rwX /var/www/html
 
     echo "### Erstelle symlinks für Benutzer"
     ln -s /vagrant /home/vagrant/vagrantFolder
