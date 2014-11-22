@@ -1,5 +1,6 @@
 typo3_src*/
 vagrant/components/components
+vagrant/components/bower_components
 vagrant/components/node_modules/
 vagrant/htdocs/index.php
 vagrant/htdocs/typo3
