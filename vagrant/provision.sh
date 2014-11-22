@@ -63,11 +63,14 @@ if [ -f $flagInstalled ]
       mysqladmin -u root password root
 
       echo "### create user t3dist with password t3dist"
-      mysql -uroot -proot -e "CREATE USER 't3dist'@'t3dist' IDENTIFIED BY 't3dist'"
+      mysql -uroot -proot -e "CREATE USER 't3dist'@'localhost' IDENTIFIED BY 't3dist'"
+
+      echo "### create database t3dist"
+      mysql -uroot -proot -e "CREATE DATABASE t3dist CHARACTER SET utf8 COLLATE utf8_general_ci;"
 
       echo "### set t3dist privileges"
       # @todo check privileges 
-      mysql -uroot -proot -e "GRANT ALL PRIVILEGES ON * . * TO 't3dist'@'localhost'"
+      mysql -uroot -proot -e "GRANT ALL PRIVILEGES ON t3dist . * TO 't3dist'@'localhost'"
 
       echo "### flush privileges"
       mysql -uroot -proot -e "FLUSH PRIVILEGES"
