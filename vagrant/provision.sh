@@ -101,24 +101,11 @@ if [ -f $flagInstalled ]
       # Install phpmyadmin with noninteractive mode (it will use the set settings)
       apt-get install -q -y phpmyadmin
 
-    fi
-
-    # TESTING HERE
-
-
-
-
-
-    # TESTING END
-
-    if [ "$development" = yes ] ; then
-
-
       echo "### install typo3"
       cd /var/www
       if [ -d typo3_src-6.2.6 ]
         then
-          echo "sourcecode exists, no action"
+          echo "### sourcecode exists, no action"
           # @todo check md5
         else
           if [ -f 6.2 ]
@@ -134,21 +121,35 @@ if [ -f $flagInstalled ]
 
           echo "### delete tarball"
           rm 6.2
+
+          echo "### create symlinks"
+          cd /var/www/html
+          ln -s ../typo3_src-6.2.* typo3_src
+          ln -s typo3_src/index.php index.php
+          ln -s typo3_src/typo3 typo3
+          # Datei .htaccess bereitstellen wenn nicht vorhanden
+          if [ -f .htaccess ]
+            then
+              echo "### .htaccess file exists"
+            else
+              echo "### copy typo3 default .htaccess file"
+              cp typo3_src/_.htaccess .htaccess
+          fi
+
       fi
 
-      echo "### create symlinks"
-      cd /vagrant/html
-      ln -s ../typo3_src-6.2.* typo3_src
-      ln -s typo3_src/index.php index.php
-      ln -s typo3_src/typo3 typo3
-      # Datei .htaccess bereitstellen wenn nicht vorhanden
-      if [ -f .htaccess ]
-        then
-          echo ".htaccess bereits vorhanden"
-        else
-          echo ".htaccess bereitstellen"
-          cp typo3_src/_.htaccess .htaccess
-      fi
+    fi
+
+    # TESTING HERE
+
+
+
+
+
+    # TESTING END
+
+    if [ "$development" = yes ] ; then
+
 
       echo "### Erstelle symlinks für Benutzer"
       ln -s /vagrant /home/vagrant/vagrantFolder
