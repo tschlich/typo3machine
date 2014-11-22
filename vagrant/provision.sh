@@ -73,7 +73,7 @@ if [ -f $flagInstalled ]
       echo "### setting password for mysql user root to root"
       mysqladmin -u root password root
 
-      echo "### creating user t3dist with password t3dist"
+      echo "### creating mysql user t3dist with password t3dist"
       mysql -uroot -proot -e "CREATE USER 't3dist'@'localhost' IDENTIFIED BY 't3dist'"
 
       echo "### creating database t3dist"
@@ -155,7 +155,19 @@ if [ -f $flagInstalled ]
           # The nodejs package contains the nodejs binary as well as npm
           # in order for some npm packages to work (such as those that require 
           # building from source), build-essentials package will be installed
+          echo "### installing build-essential"
           sudo apt-get install -y build-essential
+
+          echo "### installing bower global"
+          npm install -g bower
+
+          echo "### installing grunt global"
+          npm install -g grunt-cli
+
+          echo "### installing nodejs packages"
+          ln -s /vagrant/components /var/www/components
+          cd /var/www/components
+          npm install
 
       fi # /-d typo3_src-6.2.6
 
