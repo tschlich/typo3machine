@@ -3,187 +3,193 @@
 # execution time start
 startTime=$(date +%s)
 
-# debug true/false
-debug=true
+### !! IMPORTANT !! ############################################################
+# set development false to avoid data loss
+# also set development false on first vm start when developing
+# @todo - Development/Production, split to different provisioners like:
+### entire project installation
+# 1. install   provision.sh          # local changes will be lost!
+### partial provisioners
+# 2. database  provision_database.sh # database only, think about migrations
+# 3. media     provision_media.sh    # media only, like images, videos, pdfiles
+# 4. layout    provision_layout.sh   # layout only, html, css, less, 
+# ...                                # tbc... 
+# e.g. $ vagrant provision --provision-with media
+# see https://docs.vagrantup.com/v2/cli/provision.html
+development=true
 
-# speed up provisioning for development
-flagInstalled="/var/www/flagInstalled"
+# speed up provisioning for development 
+# @todo - remove when different provisioners are implemented
+flagInstalled="/home/vagrant/flagInstalled"
 if [ -f $flagInstalled ]
   then
-    echo "System wurde bereits installiert"
+    echo "### system allready started"
   else
-    echo "Starte Installation: thosh-t3dist"
-#@debug >> touch $flagInstalled #<<
+    echo "### start project installation"
+    # remove linebreak when not developing on vagrant>>    touch $flagInstalled #<<
 
-        echo "### update package sources"
-        apt-get update
+    if [ "$development" = false ] ; then
 
-        echo "### install git"
-        apt-get install -y git
+      echo "### update package sources"
+      apt-get update
 
-    if [ "$debug" = false ] ; then
+      #echo "### install git"
+      #apt-get install -y git
 
-        echo "### Apache installieren:"
-        apt-get install -y apache2
+      echo "### install apache2"
+      apt-get install -y apache2
 
-        echo "### entferne html-Dummy"
-        rm /var/www/html/index.html
+      echo "### remove html dummy"
+      rm /var/www/html/index.html
 
-        # Eintrag in der hosts-Datei des Hostsystems nicht vergessen!
-        echo "### Aktiviere vhost"
-        a2ensite thosh-t3dist
-        # @todo SSL https://
+      echo "### enable vhost"
+      a2ensite thosh-t3dist
+      # @todo https://
 
-        echo "### Installiere MySQL"
-        # Setting the noninteractive Mode
-        export DEBIAN_FRONTEND=noninteractive
-        # Installs MySQL in noninteractive Mode 
-        apt-get install -q -y mysql-server
-        # Set Password for user "root" to root
-        # @todo - Development/Production
-        mysqladmin -u root password root
+      echo "### add user dev, group member of vagrant, admin and www-data"
+      useradd -G vagrant,admin,www-data -m -s /bin/bash dev
 
-        echo "### PHP5 installieren"
-        apt-get install -y php5
-        #apt-get install -y libapache2-mod-auth-mysql
-        apt-get install -y php5-mysql
-        # Wird für phpMyAdmin benötigt
-        apt-get install -y php5-mcrypt
-        #apt-get install -y php5-gd 
-        #apt-get install -y php-apc
-        #apt-get install -y php-pear
+      echo "### change user password to dev"
+      echo "dev:dev" | chpasswd
 
-        echo "### Webserver neu starten"
-        apache2ctl restart
-
-        echo "### Weitere Programme installieren"
-        apt-get install -y freetype* 
-        apt-get install -y graphicsmagick
-
-        echo "### Installiere PhpMyAdmin"
-        # Configure the Settings with debconf-set-selections
-        echo 'phpmyadmin phpmyadmin/dbconfig-install boolean true' | debconf-set-selections
-        echo 'phpmyadmin phpmyadmin/app-password-confirm password root' | debconf-set-selections
-        echo 'phpmyadmin phpmyadmin/mysql/admin-pass password root' | debconf-set-selections
-        echo 'phpmyadmin phpmyadmin/mysql/app-pass password root' | debconf-set-selections
-        echo 'phpmyadmin phpmyadmin/reconfigure-webserver multiselect apache2' | debconf-set-selections
-        # Install phpmyadmin with noninteractive mode (it will use the set settings)
-        apt-get install -q -y phpmyadmin
-
-
+      #echo "### add existing user vagrant to group www-data"
+      #usermod -a -G www-data vagrant
     fi
 
+    # TESTING HERE
+    # TESTING END
 
-        echo "### Installiere Typo3"
-        cd /var/www
-        if [ -d typo3_src-6.2.6 ]
-          then
-            echo "typo3_src-6.2.x exists"
-            # @todo check md5 or similar
-          else
-            if [ -f 6.2 ]
-              then
-                echo "### source file exists"
-              else
-                echo "### load source file (current 6.2.x) ..."
-                wget -q http://get.typo3.org/6.2
-            fi
+    if [ "$development" = yes ] ; then
 
-            echo "### unpack source file ..."
-            tar -xzf 6.2
-            echo "### delete source file"
-            #@debug >>
-            rm 6.2 #<<
-        fi
+      echo "### install mysql using noninteractive mode"
+      export DEBIAN_FRONTEND=noninteractive 
+      apt-get install -q -y mysql-server
 
-        echo "### clone git repo test"
-        cd /vagrant
-        git clone https://github.com/tschlich/file_example.git
-        rm -Rf /var/www/html
-        ln -s /vagrant/file_example/html /var/www/html
+      echo "### set password for user root to root"
+      mysqladmin -u root password root
 
+      echo "### create user t3dist with password t3dist"
+      mysql -uroot -proot -e "CREATE USER 't3dist'@'t3dist' IDENTIFIED BY 't3dist'"
 
-    if [ "$debug" = false ] ; then
+      echo "### set t3dist privileges"
+      # @todo check privileges 
+      mysql -uroot -proot -e "GRANT ALL PRIVILEGES ON * . * TO 't3dist'@'localhost'"
 
+      echo "### flush privileges"
+      mysql -uroot -proot -e "FLUSH PRIVILEGES"
 
-        echo "### Erstelle Symlinks"
-        cd /vagrant/html
-        ln -s ../typo3_src-6.2.* typo3_src
-        ln -s typo3_src/index.php index.php
-        ln -s typo3_src/typo3 typo3
-        # Datei .htaccess bereitstellen wenn nicht vorhanden
-        if [ -f .htaccess ]
-          then
-            echo ".htaccess bereits vorhanden"
-          else
-            echo ".htaccess bereitstellen"
-            cp typo3_src/_.htaccess .htaccess
-        fi
+      echo "### install php"
+      apt-get install -y php5
+      apt-get install -y php5-mysql
+      apt-get install -y php5-mcrypt
+      #apt-get install -y libapache2-mod-auth-mysql
+      #apt-get install -y php5-gd 
+      #apt-get install -y php-apc
+      #apt-get install -y php-pear
 
-        echo "### User Configuration"
-        # Adding User dev and make him member of the Groups vagrant and admin
-        useradd -G vagrant,admin,www-data -m -s /bin/bash dev
+      echo "### restart apache"
+      apache2ctl restart
 
-        # change password of user dev to dev
-        echo "dev:dev" | chpasswd
+      echo "### install additional packages"
+      apt-get install -y freetype* 
+      apt-get install -y graphicsmagick
 
-        #  Adding existing user vagrant to group www-data
-        usermod -a -G www-data vagrant
-    # @todo check rights
-    #    chown -R www-data:www-data /var/www
-    #    chmod -R ugo-rwx /var/www
-    #    chmod -R ug+rwX /var/www
-    chown -R www-data:www-data /var/www/html
-    chmod -R ugo-rwx /var/www/html
-    chmod -R ug+rwX /var/www/html
+      echo "### install phpMyAdmin"
+      # Configure the Settings with debconf-set-selections
+      echo 'phpmyadmin phpmyadmin/dbconfig-install boolean true' | debconf-set-selections
+      echo 'phpmyadmin phpmyadmin/app-password-confirm password root' | debconf-set-selections
+      echo 'phpmyadmin phpmyadmin/mysql/admin-pass password root' | debconf-set-selections
+      echo 'phpmyadmin phpmyadmin/mysql/app-pass password root' | debconf-set-selections
+      echo 'phpmyadmin phpmyadmin/reconfigure-webserver multiselect apache2' | debconf-set-selections
+      # Install phpmyadmin with noninteractive mode (it will use the set settings)
+      apt-get install -q -y phpmyadmin
 
-        echo "### Erstelle symlinks für Benutzer"
-        ln -s /vagrant /home/vagrant/vagrantFolder
-        ln -s /vagrant /home/dev/vagrantFolder
+      echo "### install typo3"
+      cd /var/www
+      if [ -d typo3_src-6.2.6 ]
+        then
+          echo "sourcecode exists, no action"
+          # @todo check md5
+        else
+          if [ -f 6.2 ]
+            then
+              echo "### tarball exists, unpack ..."
+            else
+              echo "### load tarball (current 6.2.x) ..."
+              wget -q http://get.typo3.org/6.2
+          fi
 
-        echo "### Installing nodejs"
-        # install PPA in order to get access to its contents
-        curl -sL https://deb.nodesource.com/setup | sudo bash -
+          echo "### unpack tarball ..."
+          tar -xzf 6.2
 
-        # The PPA will be added to your configuration and your local package cache 
-        # will be updated automatically. 
-        # After running the setup script from nodesource, you can install the Node.js
-        # package in the same way that you did above
-        sudo apt-get install -y nodejs
+          echo "### delete tarball"
+          rm 6.2
+      fi
 
-        # The nodejs package contains the nodejs binary as well as npm, so you don't 
-        # need to install npm separately. 
-        # However, in order for some npm packages to work (such as those that require 
-        # building from source), you will need to install the build-essentials package:
-        sudo apt-get install -y build-essential
+      echo "### create symlinks"
+      cd /vagrant/html
+      ln -s ../typo3_src-6.2.* typo3_src
+      ln -s typo3_src/index.php index.php
+      ln -s typo3_src/typo3 typo3
+      # Datei .htaccess bereitstellen wenn nicht vorhanden
+      if [ -f .htaccess ]
+        then
+          echo ".htaccess bereits vorhanden"
+        else
+          echo ".htaccess bereitstellen"
+          cp typo3_src/_.htaccess .htaccess
+      fi
 
-        echo "### Installing Bower Web Package Manager" 
-        npm install -g bower
-    fi
+      echo "### Erstelle symlinks für Benutzer"
+      ln -s /vagrant /home/vagrant/vagrantFolder
+      ln -s /vagrant /home/dev/vagrantFolder
+
+      echo "### Installing nodejs"
+      # install PPA in order to get access to its contents
+      curl -sL https://deb.nodesource.com/setup | sudo bash -
+
+      # The PPA will be added to your configuration and your local package cache 
+      # will be updated automatically. 
+      # After running the setup script from nodesource, you can install the Node.js
+      # package in the same way that you did above
+      sudo apt-get install -y nodejs
+
+      # The nodejs package contains the nodejs binary as well as npm, so you don't 
+      # need to install npm separately. 
+      # However, in order for some npm packages to work (such as those that require 
+      # building from source), you will need to install the build-essentials package:
+      sudo apt-get install -y build-essential
+
+      echo "### Installing Bower Web Package Manager" 
+      npm install -g bower
+
+  fi
+
 fi
 
 
-# start testing
+
+
+# TESTING HERE
 
 #cd /var/www/html
-
-
-
 
 # @todo Problems with group rights,  on OSX the shared folder on the host needs 
 # to get fixed after every bower package install in bower_components
 # admin rights seems to be ok for store in vagrantFolder (see t3source)
 # OR: store package file in the Git project maybe in afterBoot.sh or extra script
-echo "### loading jQuery" 
+#echo "### loading jQuery" 
 #sudo -H -u dev bower install jquery
 
-echo "###  Loading Twitter Bootstrap Framework" 
+#echo "###  Loading Twitter Bootstrap Framework" 
 #sudo -H -u dev bower install bootstrap
 
-echo "###  Loading Twitter Bootstrap Framework" 
+#echo "###  Loading Twitter Bootstrap Framework" 
 #sudo -H -u dev bower install modernizr
 
-# end testing 
+# TESTING END
+
+
 echo "### Installation/Provisioning finished"
 finishTime=$(date +%s)
 executionTimeSec=$((finishTime - startTime))
