@@ -58,11 +58,6 @@ if [ -f $flagInstalled ]
       echo "### setting password to dev"
       echo "dev:dev" | chpasswd
 
-      echo "### creating symlinks to vagrantFolder"
-      ln -s /vagrant /home/dev/vagrantFolder
-      ln -s /vagrant /home/t3dist/vagrantFolder
-      ln -s /vagrant /home/vagrant/vagrantFolder
-
       echo "### adding groups to existing user vagrant: www-data, dev, t3dist"
       usermod -a -G www-data,dev,t3dist vagrant
 
