@@ -15,7 +15,16 @@ Diese Programme müssen installiert sein und funktionieren:
 - [__Vagrant__](https://www.vagrantup.com)
 
 __Hinweis:__ Diese Projektbeschreibung ist gültig für _OSX_ und _Linux_. Das Vagrant-Projekt selbst sollte aber auch unter _Windows_ eingesetzt werden können.
- 
+
+__Information:__ additional files and folders will be added by vm during system is starting.
+For a complete uninstall after _vagrant destroy_ remove following files:
+
+ * vagrant/components/bower_components
+ * vagrant/components/node_modules
+ * vagrant/htdocs
+ * vagrant/vhosts/000-default.conf
+ * vagrant/vhosts/default-ssl.conf
+
 ## Projektdateien
     + WebEntwicklung/         // Projekt-Verzeichnis 
     |
@@ -33,11 +42,13 @@ __Hinweis:__ Diese Projektbeschreibung ist gültig für _OSX_ und _Linux_. Das V
       |
       |- bootstrap.sh         // Aktionen nach dem 1. Systemboot oder "vagrant provision"
       |
-      |- Vagrantfile          // Der Bauplan der VM
-      |
-      |-+ html                // Gemeinsamer Ordner: /var/www/html
+      |-+ components          // sync folder: /var/www/components (so you can browse data on host os)
       | |
-      | +- .gitkeep           // Hilfsdatei da git leere Ordner ignoriert
+      | +- bower.json         // bower setup file
+      | |
+      | +- package.json       // nodejs setup file
+      |
+      |- Vagrantfile          // Der Bauplan der VM
       |
       +-+ vhosts              // Gemeinsamer Ordner: /etc/apache2/sites-available
         |
