@@ -30,8 +30,31 @@ if [ -f $flagInstalled ]
 
     if [ "$development" = false ] ; then
 
-      echo "### updating package sources"
-      apt-get update
+      echo "### go to folder /var/www/components"
+      cd /var/www/components
+
+      echo "### installing nodejs (apt sources will be updatet)"
+      # adding PPA in order to get access to its contents
+      curl -sL https://deb.nodesource.com/setup | sudo bash -
+      sudo apt-get install -y nodejs
+
+      # The nodejs package contains the nodejs binary as well as npm
+      # in order for some npm packages to work (such as those that require 
+      # building from source), build-essentials package will be installed
+      echo "### installing build-essential"
+      sudo apt-get install -y build-essential
+
+      echo "### installing bower global"
+      npm install -g bower
+
+      echo "### installing grunt global"
+      npm install -g grunt-cli
+
+      echo "### installing nodejs packages"
+      npm install
+
+      echo "installing bower packages" 
+      sudo -H -u vagrant bower install
 
       #echo "### installing git"
       #apt-get install -y git
@@ -108,7 +131,7 @@ if [ -f $flagInstalled ]
       apt-get install -q -y phpmyadmin
 
       echo "### installing typo3"
-      cd /var/www
+      cd /var/www/components
       if [ -d typo3_src-6.2.6 ]
         then
           echo "### sourcecode exists, no action"
@@ -130,7 +153,7 @@ if [ -f $flagInstalled ]
 
           echo "### creating symlinks"
           cd /var/www/html
-          ln -s ../typo3_src-6.2.* typo3_src
+          ln -s ../components/typo3_src-6.2.* typo3_src
           ln -s typo3_src/index.php index.php
           ln -s typo3_src/typo3 typo3
           # Datei .htaccess bereitstellen wenn nicht vorhanden
@@ -142,29 +165,6 @@ if [ -f $flagInstalled ]
               cp typo3_src/_.htaccess .htaccess
           fi # /-f .htaccess
 
-          echo "### installing nodejs"
-          # adding PPA in order to get access to its contents
-          curl -sL https://deb.nodesource.com/setup | sudo bash -
-          sudo apt-get install -y nodejs
-
-          # The nodejs package contains the nodejs binary as well as npm
-          # in order for some npm packages to work (such as those that require 
-          # building from source), build-essentials package will be installed
-          echo "### installing build-essential"
-          sudo apt-get install -y build-essential
-
-          echo "### installing bower global"
-          npm install -g bower
-
-          echo "### installing grunt global"
-          npm install -g grunt-cli
-
-          echo "### installing nodejs packages"
-          cd /var/www/components
-          npm install
-
-          echo "installing bower packages in" 
-          sudo -H -u vagrant bower install
 
       fi # /-d typo3_src-6.2.6
 
