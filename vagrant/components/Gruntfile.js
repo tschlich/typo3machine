@@ -9,7 +9,7 @@ module.exports = function(grunt) {
           paths: ["css"]
         },
         files: {
-          "css/main.css": "less/main.less"
+          "../htdocs/css/main.css": "less/main.less"
         }
       },
       production: {
