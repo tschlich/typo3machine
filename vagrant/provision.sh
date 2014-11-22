@@ -54,12 +54,6 @@ if [ -f $flagInstalled ]
 
       #echo "### add existing user vagrant to group www-data"
       #usermod -a -G www-data vagrant
-    fi
-
-    # TESTING HERE
-    # TESTING END
-
-    if [ "$development" = yes ] ; then
 
       echo "### install mysql using noninteractive mode"
       export DEBIAN_FRONTEND=noninteractive 
@@ -77,6 +71,19 @@ if [ -f $flagInstalled ]
 
       echo "### flush privileges"
       mysql -uroot -proot -e "FLUSH PRIVILEGES"
+
+    fi
+
+    # TESTING HERE
+
+
+
+
+
+    # TESTING END
+
+    if [ "$development" = yes ] ; then
+
 
       echo "### install php"
       apt-get install -y php5
