@@ -16,7 +16,7 @@ startTime=$(date +%s)
 # ...                                # tbc... 
 # e.g. $ vagrant provision --provision-with media
 # see https://docs.vagrantup.com/v2/cli/provision.html
-development=true
+development=false
 
 # speed up provisioning for development 
 # @todo - remove when different provisioners are implemented
@@ -46,17 +46,17 @@ if [ -f $flagInstalled ]
       a2ensite thosh-t3dist
       # @todo https://
 
-      echo "### adding user dev, groups: vagrant, admin, www-data, t3dist"
-      useradd -G vagrant,admin,www-data,t3dist -m -s /bin/bash dev
-
-      echo "### setting password to dev"
-      echo "dev:dev" | chpasswd
-
       echo "### adding user t3dist, groups: www-data"
       useradd -G www-data -m -s /bin/bash t3dist
 
       echo "### setting password to t3dist"
       echo "t3dist:t3dist" | chpasswd
+
+      echo "### adding user dev, groups: vagrant, admin, www-data, t3dist"
+      useradd -G vagrant,admin,www-data,t3dist -m -s /bin/bash dev
+
+      echo "### setting password to dev"
+      echo "dev:dev" | chpasswd
 
       echo "### creating symlinks to vagrantFolder"
       ln -s /vagrant /home/dev/vagrantFolder
@@ -125,7 +125,7 @@ if [ -f $flagInstalled ]
             else
               echo "### loading tarball (current 6.2.x) ..."
               wget -q http://get.typo3.org/6.2
-          fi
+          fi # /-f 6.2
 
           echo "### unpacking tarball ..."
           tar -xzf 6.2
@@ -145,64 +145,29 @@ if [ -f $flagInstalled ]
             else
               echo "### copying typo3 .htaccess default file"
               cp typo3_src/_.htaccess .htaccess
-          fi
+          fi # /-f .htaccess
 
-      fi
+          echo "### installing nodejs"
+          # adding PPA in order to get access to its contents
+          curl -sL https://deb.nodesource.com/setup | sudo bash -
+          sudo apt-get install -y nodejs
 
-    fi
+          # The nodejs package contains the nodejs binary as well as npm
+          # in order for some npm packages to work (such as those that require 
+          # building from source), build-essentials package will be installed
+          sudo apt-get install -y build-essential
 
-    # TESTING HERE
+      fi # /-d typo3_src-6.2.6
 
+    fi # /"$development" = false
 
-
-
-    # TESTING END
-
-    if [ "$development" = yes ] ; then
-
-
-      echo "### installing nodejs"
-      # install PPA in order to get access to its contents
-      curl -sL https://deb.nodesource.com/setup | sudo bash -
-
-      # The PPA will be added to your configuration and your local package cache 
-      # will be updated automatically. 
-      # After running the setup script from nodesource, you can install the Node.js
-      # package in the same way that you did above
-      sudo apt-get install -y nodejs
-
-      # The nodejs package contains the nodejs binary as well as npm, so you don't 
-      # need to install npm separately. 
-      # However, in order for some npm packages to work (such as those that require 
-      # building from source), you will need to install the build-essentials package:
-      sudo apt-get install -y build-essential
-
-      echo "### Installing Bower Web Package Manager" 
-      npm install -g bower
-
-  fi
-
-fi
+fi # /flagInstalled
 
 
 
 
 # TESTING HERE
 
-#cd /var/www/html
-
-# @todo Problems with group rights,  on OSX the shared folder on the host needs 
-# to get fixed after every bower package install in bower_components
-# admin rights seems to be ok for store in vagrantFolder (see t3source)
-# OR: store package file in the Git project maybe in afterBoot.sh or extra script
-#echo "### loading jQuery" 
-#sudo -H -u dev bower install jquery
-
-#echo "###  Loading Twitter Bootstrap Framework" 
-#sudo -H -u dev bower install bootstrap
-
-#echo "###  Loading Twitter Bootstrap Framework" 
-#sudo -H -u dev bower install modernizr
 
 # TESTING END
 
