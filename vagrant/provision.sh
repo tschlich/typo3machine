@@ -46,14 +46,25 @@ if [ -f $flagInstalled ]
       a2ensite thosh-t3dist
       # @todo https://
 
-      echo "### add user dev, group member of vagrant, admin and www-data"
-      useradd -G vagrant,admin,www-data -m -s /bin/bash dev
+      echo "### add user dev, groups: vagrant, admin, www-data, t3dist"
+      useradd -G vagrant,admin,www-data,t3dist -m -s /bin/bash dev
 
-      echo "### change user password to dev"
+      echo "### set password to dev"
       echo "dev:dev" | chpasswd
 
-      #echo "### add existing user vagrant to group www-data"
-      #usermod -a -G www-data vagrant
+      echo "### add user t3dist, groups: www-data"
+      useradd -G www-data -m -s /bin/bash t3dist
+
+      echo "### set password to t3dist"
+      echo "t3dist:t3dist" | chpasswd
+
+      echo "### create symlinks to vagrantFolder"
+      ln -s /vagrant /home/dev/vagrantFolder
+      ln -s /vagrant /home/t3dist/vagrantFolder
+      ln -s /vagrant /home/vagrant/vagrantFolder
+
+      echo "### add groups to existing user vagrant: www-data, dev, t3dist"
+      usermod -a -G www-data,dev,t3dist vagrant
 
       echo "### install mysql using noninteractive mode"
       export DEBIAN_FRONTEND=noninteractive 
@@ -145,15 +156,10 @@ if [ -f $flagInstalled ]
 
 
 
-
     # TESTING END
 
     if [ "$development" = yes ] ; then
 
-
-      echo "### Erstelle symlinks für Benutzer"
-      ln -s /vagrant /home/vagrant/vagrantFolder
-      ln -s /vagrant /home/dev/vagrantFolder
 
       echo "### Installing nodejs"
       # install PPA in order to get access to its contents
