@@ -25,68 +25,68 @@ if [ -f $flagInstalled ]
   then
     echo "### system allready started"
   else
-    echo "### start project installation"
+    echo "### starting project installation"
     # remove linebreak when not developing on vagrant>>    touch $flagInstalled #<<
 
     if [ "$development" = false ] ; then
 
-      echo "### update package sources"
+      echo "### updating package sources"
       apt-get update
 
-      #echo "### install git"
+      #echo "### installing git"
       #apt-get install -y git
 
-      echo "### install apache2"
+      echo "### installing apache2"
       apt-get install -y apache2
 
-      echo "### remove html dummy"
+      echo "### removing html dummy"
       rm /var/www/html/index.html
 
-      echo "### enable vhost"
+      echo "### enabling vhost"
       a2ensite thosh-t3dist
       # @todo https://
 
-      echo "### add user dev, groups: vagrant, admin, www-data, t3dist"
+      echo "### adding user dev, groups: vagrant, admin, www-data, t3dist"
       useradd -G vagrant,admin,www-data,t3dist -m -s /bin/bash dev
 
-      echo "### set password to dev"
+      echo "### setting password to dev"
       echo "dev:dev" | chpasswd
 
-      echo "### add user t3dist, groups: www-data"
+      echo "### adding user t3dist, groups: www-data"
       useradd -G www-data -m -s /bin/bash t3dist
 
-      echo "### set password to t3dist"
+      echo "### setting password to t3dist"
       echo "t3dist:t3dist" | chpasswd
 
-      echo "### create symlinks to vagrantFolder"
+      echo "### creating symlinks to vagrantFolder"
       ln -s /vagrant /home/dev/vagrantFolder
       ln -s /vagrant /home/t3dist/vagrantFolder
       ln -s /vagrant /home/vagrant/vagrantFolder
 
-      echo "### add groups to existing user vagrant: www-data, dev, t3dist"
+      echo "### adding groups to existing user vagrant: www-data, dev, t3dist"
       usermod -a -G www-data,dev,t3dist vagrant
 
-      echo "### install mysql using noninteractive mode"
+      echo "### installing mysql using noninteractive mode"
       export DEBIAN_FRONTEND=noninteractive 
       apt-get install -q -y mysql-server
 
-      echo "### set password for user root to root"
+      echo "### setting password for mysql user root to root"
       mysqladmin -u root password root
 
-      echo "### create user t3dist with password t3dist"
+      echo "### creating user t3dist with password t3dist"
       mysql -uroot -proot -e "CREATE USER 't3dist'@'localhost' IDENTIFIED BY 't3dist'"
 
-      echo "### create database t3dist"
+      echo "### creating database t3dist"
       mysql -uroot -proot -e "CREATE DATABASE t3dist CHARACTER SET utf8 COLLATE utf8_general_ci;"
 
-      echo "### set t3dist privileges"
+      echo "### setting t3dist privileges"
       # @todo check privileges 
       mysql -uroot -proot -e "GRANT ALL PRIVILEGES ON t3dist . * TO 't3dist'@'localhost'"
 
-      echo "### flush privileges"
+      echo "### flushing privileges"
       mysql -uroot -proot -e "FLUSH PRIVILEGES"
 
-      echo "### install php"
+      echo "### installing php"
       apt-get install -y php5
       apt-get install -y php5-mysql
       apt-get install -y php5-mcrypt
@@ -95,14 +95,14 @@ if [ -f $flagInstalled ]
       #apt-get install -y php-apc
       #apt-get install -y php-pear
 
-      echo "### restart apache"
+      echo "### restarting apache"
       apache2ctl restart
 
-      echo "### install additional packages"
+      echo "### installing additional packages"
       apt-get install -y freetype* 
       apt-get install -y graphicsmagick
 
-      echo "### install phpMyAdmin"
+      echo "### installing phpMyAdmin"
       # Configure the Settings with debconf-set-selections
       echo 'phpmyadmin phpmyadmin/dbconfig-install boolean true' | debconf-set-selections
       echo 'phpmyadmin phpmyadmin/app-password-confirm password root' | debconf-set-selections
@@ -112,7 +112,7 @@ if [ -f $flagInstalled ]
       # Install phpmyadmin with noninteractive mode (it will use the set settings)
       apt-get install -q -y phpmyadmin
 
-      echo "### install typo3"
+      echo "### installing typo3"
       cd /var/www
       if [ -d typo3_src-6.2.6 ]
         then
@@ -121,19 +121,19 @@ if [ -f $flagInstalled ]
         else
           if [ -f 6.2 ]
             then
-              echo "### tarball exists, unpack ..."
+              echo "### tarball exists, unpacking ..."
             else
-              echo "### load tarball (current 6.2.x) ..."
+              echo "### loading tarball (current 6.2.x) ..."
               wget -q http://get.typo3.org/6.2
           fi
 
-          echo "### unpack tarball ..."
+          echo "### unpacking tarball ..."
           tar -xzf 6.2
 
-          echo "### delete tarball"
+          echo "### deleting tarball"
           rm 6.2
 
-          echo "### create symlinks"
+          echo "### creating symlinks"
           cd /var/www/html
           ln -s ../typo3_src-6.2.* typo3_src
           ln -s typo3_src/index.php index.php
@@ -141,9 +141,9 @@ if [ -f $flagInstalled ]
           # Datei .htaccess bereitstellen wenn nicht vorhanden
           if [ -f .htaccess ]
             then
-              echo "### .htaccess file exists"
+              echo "### file .htaccess exists"
             else
-              echo "### copy typo3 default .htaccess file"
+              echo "### copying typo3 .htaccess default file"
               cp typo3_src/_.htaccess .htaccess
           fi
 
@@ -161,7 +161,7 @@ if [ -f $flagInstalled ]
     if [ "$development" = yes ] ; then
 
 
-      echo "### Installing nodejs"
+      echo "### installing nodejs"
       # install PPA in order to get access to its contents
       curl -sL https://deb.nodesource.com/setup | sudo bash -
 
