@@ -164,6 +164,9 @@ if [ -f $flagInstalled ]
           cd /var/www/components
           npm install
 
+          echo "installing bower packages in" 
+          sudo -H -u vagrant bower install
+
       fi # /-d typo3_src-6.2.6
 
     fi # /"$development" = false
