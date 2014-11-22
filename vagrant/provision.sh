@@ -75,19 +75,6 @@ if [ -f $flagInstalled ]
       echo "### flush privileges"
       mysql -uroot -proot -e "FLUSH PRIVILEGES"
 
-    fi
-
-    # TESTING HERE
-
-
-
-
-
-    # TESTING END
-
-    if [ "$development" = yes ] ; then
-
-
       echo "### install php"
       apt-get install -y php5
       apt-get install -y php5-mysql
@@ -113,6 +100,19 @@ if [ -f $flagInstalled ]
       echo 'phpmyadmin phpmyadmin/reconfigure-webserver multiselect apache2' | debconf-set-selections
       # Install phpmyadmin with noninteractive mode (it will use the set settings)
       apt-get install -q -y phpmyadmin
+
+    fi
+
+    # TESTING HERE
+
+
+
+
+
+    # TESTING END
+
+    if [ "$development" = yes ] ; then
+
 
       echo "### install typo3"
       cd /var/www
