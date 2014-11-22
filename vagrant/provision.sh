@@ -160,7 +160,6 @@ if [ -f $flagInstalled ]
           npm install -g grunt-cli
 
           echo "### installing nodejs packages"
-          ln -s /vagrant/components /var/www/components
           cd /var/www/components
           npm install
 
