@@ -1,6 +1,6 @@
 typo3_src*/
-vagrant/html/index.php
-vagrant/html/typo3
-vagrant/html/typo3_src
+vagrant/htdocs/index.php
+vagrant/htdocs/typo3
+vagrant/htdocs/typo3_src
 vagrant/vhosts/000-default.conf
 vagrant/vhosts/default-ssl.conf
