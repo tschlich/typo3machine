@@ -181,8 +181,8 @@ fi # /flagInstalled
 # TESTING END
 
 
-echo "### Installation/Provisioning finished"
+# show execution time
 finishTime=$(date +%s)
 executionTimeSec=$((finishTime - startTime))
 executionTime=$(date -u -d @${executionTimeSec} +"%T")
-echo "Execution time: $executionTime hh:mm:ss"
+echo "### Execution time: $executionTime hh:mm:ss"
