@@ -16,6 +16,7 @@ startTime=$(date +%s)
 # ...                                # tbc... 
 # e.g. $ vagrant provision --provision-with media
 # see https://docs.vagrantup.com/v2/cli/provision.html
+#development=true
 development=false
 
 # speed up provisioning for development 
@@ -26,7 +27,8 @@ if [ -f $flagInstalled ]
     echo "### system allready started"
   else
     echo "### starting project installation"
-    # remove linebreak when not developing on vagrant>>    touch $flagInstalled #<<
+    # remove linebreak when not developing on vagrant>>
+    touch $flagInstalled #<<
 
     if [ "$development" = false ] ; then
 
