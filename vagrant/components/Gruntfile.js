@@ -18,7 +18,7 @@ module.exports = function(grunt) {
           cleancss: true,
         },
         files: {
-          "css/main.css": "less/main.less"
+          "/var/www/html/css/main.css": "less/main.less"
         }
       }
     },
@@ -32,7 +32,7 @@ module.exports = function(grunt) {
         // Here we watch the files the less task will compile to
         // These files are sent to the live reload server after less compiles to them
         options: { livereload: true },
-        files: ['css/*.css', 'index.html'],
+        files: ['/var/www/html/css/*.css', '/var/www/html/*.html'],
       },
     },
   });
