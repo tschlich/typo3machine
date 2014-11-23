@@ -1,5 +1,6 @@
 # Web-Entwicklung mit Vagrant
-Dieses Vagrant-Projekt dient der Erarbeitung eines Workflows zum Entwickeln von Webseiten mit Typo3.
+Dieses Vagrant-Projekt dient der Erarbeitung eines 
+Workflows zum Entwickeln von Webseiten mit Typo3.
 
 ## Idee
 In der VM wird ein Typo3 mit der Distribution-Extension "Thosh" installiert.
@@ -16,16 +17,8 @@ Diese Programme müssen installiert sein und funktionieren:
 
 __Hinweis:__ Diese Projektbeschreibung ist gültig für _OSX_ und _Linux_. Das Vagrant-Projekt selbst sollte aber auch unter _Windows_ eingesetzt werden können.
 
-__Information:__ additional files and folders will be added by vm during system is starting.
-For a complete uninstall after _vagrant destroy_ remove following files:
-
- * vagrant/components/bower_components
- * vagrant/components/node_modules
- * vagrant/htdocs
- * vagrant/vhosts/000-default.conf
- * vagrant/vhosts/default-ssl.conf
-
 ## Projektdateien
+
     + WebEntwicklung/         // Projekt-Verzeichnis 
     |
     +- .git/                  // Git-Versionskontrolle
@@ -54,6 +47,19 @@ For a complete uninstall after _vagrant destroy_ remove following files:
         |
         +- thosh-t3dist.conf  // vhost-Konfiguration
 
+
+__Information:__ 
+
+additional files and folders will be added by vm during system is starting.
+
+For a complete uninstall after _vagrant destroy_ remove following files:
+
+ * vagrant/components/bower_components
+ * vagrant/components/node_modules
+ * vagrant/htdocs
+ * vagrant/vhosts/000-default.conf
+ * vagrant/vhosts/default-ssl.conf
+
 Dieser "Bauplan" ist unter Versionskontrolle (git).
 
 ## Infrastruktur
@@ -64,8 +70,13 @@ Dieser "Bauplan" ist unter Versionskontrolle (git).
 - PhpMyAdmin ([thosh-t3dist.local/phpmyadmin](thosh-t3dist.local/phpmyadmin))
 - Typo3 6.2.x LTS
 
+
 ## Installation
-Wer Vagrant kennt, kann auf das Setup-Skript verzichten. Das Skript stellt sicher, daß auf dem Host die box _ubuntu/trusty64_ verfügbar ist, wechselt in das Verzeichnis _vagrant_ und stellt ein Menü der Vagrant-Befehle zur Verfügung.
+
+Wer Vagrant kennt, kann auf das Setup-Skript verzichten. 
+Das Skript stellt sicher, daß auf dem Host die box _ubuntu/trusty64_ 
+verfügbar ist, wechselt in das Verzeichnis _vagrant_ und stellt 
+ein Menü der Vagrant-Befehle zur Verfügung.
 
 Installation unter Verwendung des Setup-Skripts:
 
@@ -84,8 +95,13 @@ Installation unter Verwendung des Setup-Skripts:
 1. Typo3 erfordert für die Installation die Datei FIRST_INSTALL im webroot
         touch /vagrant/html/FIRST_INSTALL
 
+1. Sofern HTML-Templates oder LESS-Dateien geändert werden sollen, muss grunt
+   gestartet werden
+        /vagrant/components/grunt watch
+
 
 ### Todo
+
 - Distribution-Extension "thosh-t3dist" (evtl. auf bootstrap_package basierend)
 - Git-Versionierung der Typo3-Distribution "thosh-t3dist"
 - Git-Versionierung des zu erstellenden Web-Projekts (quasi das Produkt des Vagrant-Projekts)
