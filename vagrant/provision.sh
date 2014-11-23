@@ -115,6 +115,15 @@ if [ -f $flagInstalled ]
       #apt-get install -y php-apc
       #apt-get install -y php-pear
 
+      echo "modifying php.ini"
+      upload_max_filesize=10M
+      post_max_size=10M
+      max_execution_time=240
+      for key in upload_max_filesize post_max_size max_execution_time
+      do
+       sudo sed -i "s/^\($key\).*/\1 $(eval echo = \${$key})/" /etc/php5/apache2/php.ini
+      done
+
       echo "### restarting apache"
       apache2ctl restart
 
@@ -188,8 +197,6 @@ fi # /flagInstalled
 
 
 # TESTING HERE
-
-
 # TESTING END
 
 
