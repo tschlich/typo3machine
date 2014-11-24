@@ -1,9 +1,8 @@
 typo3_src*/
-vagrant/components/components
-vagrant/components/bower_components
-vagrant/components/node_modules/
-vagrant/htdocs/index.php
-vagrant/htdocs/typo3
-vagrant/htdocs/typo3_src
-vagrant/vhosts/000-default.conf
-vagrant/vhosts/default-ssl.conf
+components/bower_components
+components/node_modules/
+htdocs/index.php
+htdocs/typo3
+htdocs/typo3_src
+vhosts/000-default.conf
+vhosts/default-ssl.conf
