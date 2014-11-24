@@ -23,19 +23,19 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.network :private_network, ip: '192.168.23.23'
 
   ## Sync Folder Configuration 
-  config.vm.synced_folder "vhosts/", "/etc/apache2/sites-available",
+  config.vm.synced_folder "../vhosts/", "/etc/apache2/sites-available",
     create: true, 
     owner:  "root", 
     group:  "root"
 
-  config.vm.synced_folder "htdocs/", "/var/www/html",
+  config.vm.synced_folder "../htdocs/", "/var/www/html",
     create: true, 
     owner:  "www-data", 
     group:  "www-data", 
     mount_options: ["dmode=775,fmode=664"]
 
   # vm will install components on host os for debugging reasons
-  config.vm.synced_folder "components/", "/var/www/components",
+  config.vm.synced_folder "../components/", "/var/www/components",
     create: true, 
     owner:  "www-data", 
     group:  "www-data", 
