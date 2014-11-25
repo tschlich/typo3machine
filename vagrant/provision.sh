@@ -172,14 +172,17 @@ if [ -f $flagInstalled ]
       ln -s ../components/typo3_src-6.2.* typo3_src
       ln -s typo3_src/index.php index.php
       ln -s typo3_src/typo3 typo3
+      
       # Datei .htaccess bereitstellen wenn nicht vorhanden
-      if [ -f .htaccess ]
-        then
-          echo "${marker}### file .htaccess exists"
-        else
-          echo "${marker}### copying typo3 .htaccess default file"
-          cp typo3_src/_.htaccess .htaccess
-      fi # /-f .htaccess
+      # @todo - remove, if later still don't wanted. 
+      # Meanwhile the bootstrap_package version of .htaccess is used
+      #if [ -f .htaccess ]
+      #  then
+      #    echo "${marker}### file .htaccess exists"
+      #  else
+      #    echo "${marker}### copying typo3 .htaccess default file"
+      #    cp typo3_src/_.htaccess .htaccess
+      #fi # /-f .htaccess
 
       echo "##############################################################"
       echo "##################### F I N I S H E D ! ######################" 
