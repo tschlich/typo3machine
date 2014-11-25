@@ -1,8 +1,13 @@
-typo3_src*/
 components/bower_components
 components/node_modules/
+components/typo3_src*/
+htdocs/.htaccess
 htdocs/index.php
+htdocs/fileadmin
 htdocs/typo3
+htdocs/typo3conf
+htdocs/typo3temp
 htdocs/typo3_src
+htdocs/uploads
 vhosts/000-default.conf
 vhosts/default-ssl.conf
