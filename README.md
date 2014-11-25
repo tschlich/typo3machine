@@ -99,6 +99,22 @@ Installation unter Verwendung des Setup-Skripts:
    gestartet werden
         /var/www/components/grunt watch
 
+1. die URL thosh-t3dist.local im Browser aufrufen
+
+1. Step 2: fill in user t3dist with password t3dist
+
+1. Step 3: select database t3dist
+
+1. Step 4: create your user with your password
+
+1. Step 5: you can uncheck the box if you want to build your own system
+
+1. after login in select "Get Extensions" in the select box at the top 
+
+1. search for bootstrap_package and install this extension
+
+1. accept downloading realurl
+
 
 ### Todo
 
