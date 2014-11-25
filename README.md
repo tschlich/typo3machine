@@ -93,11 +93,11 @@ Installation unter Verwendung des Setup-Skripts:
 1. "SSH-Zugang - ssh" auswählen
 
 1. Typo3 erfordert für die Installation die Datei FIRST_INSTALL im webroot
-        touch /vagrant/html/FIRST_INSTALL
+        touch /var/www/html/FIRST_INSTALL
 
 1. Sofern HTML-Templates oder LESS-Dateien geändert werden sollen, muss grunt
    gestartet werden
-        /vagrant/components/grunt watch
+        /var/www/components/grunt watch
 
 
 ### Todo
