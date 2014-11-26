@@ -1,13 +1,6 @@
 # Web-Entwicklung mit Vagrant
-Dieses Vagrant-Projekt dient der Erarbeitung eines 
-Workflows zum Entwickeln von Webseiten mit Typo3.
-
-## Idee
-In der VM wird ein Typo3 mit der Distribution-Extension "Thosh" installiert.
-Diese Distribution soll auf der Extension bootstrap_package aufbauen (die auch 
-von der offiziellen Distribution "Introduction" eingesetzt wird). 
-Eventuell werde ich aber auch ein eigenständiges Template aufbauen wie z.B. im 
-[PanadeEdu-Tutorial](https://github.com/PanadeEdu/tutorial_vm "Tutorial auf Github")
+@todo Dieses Vagrant-Projekt erstellt eine VM mit vorinstalliertem TYPO3 inkl. 
+der Erweiterung bootstrap_package. 
 
 ## Voraussetzungen
 Diese Programme müssen installiert sein und funktionieren:
@@ -15,7 +8,9 @@ Diese Programme müssen installiert sein und funktionieren:
 - [__Virtualbox__](https://www.virtualbox.org)
 - [__Vagrant__](https://www.vagrantup.com)
 
-__Hinweis:__ Diese Projektbeschreibung ist gültig für _OSX_ und _Linux_. Das Vagrant-Projekt selbst sollte aber auch unter _Windows_ eingesetzt werden können.
+__Hinweis:__ Diese Projektbeschreibung ist gültig für _OSX_ und _Linux_. 
+Das Vagrant-Projekt selbst sollte aber auch unter _Windows_ eingesetzt werden können.
+Es muss dann allerdings auf die setup.sh verzichtet werden.
 
 ## Projektdateien
 
@@ -114,6 +109,36 @@ Installation unter Verwendung des Setup-Skripts:
 1. search for bootstrap_package and install this extension
 
 1. accept downloading realurl
+
+1. install german translations
+
+1. 
+
+1. 
+
+1. 
+
+1. 
+
+1. 
+
+1. 
+
+1. 
+
+1. 
+
+1. 
+
+1. 
+
+1. 
+
+1. 
+
+1. 
+
+
 
 
 ### Todo
