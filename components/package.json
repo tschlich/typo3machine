@@ -1,7 +1,7 @@
 {
-  "name": "t3dist",
+  "name": "typomachine",
   "version": "0.0.1",
-  "description": "t3dist metadata",
+  "description": "typomachine metadata",
   "author": "t.schlich@mad-world.de",
   "license": "ISC",
   "dependencies": {

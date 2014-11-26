@@ -70,23 +70,23 @@ if [ -f $flagInstalled ]
       rm /var/www/html/index.html
 
       echo "${marker}### enabling vhost"
-      a2ensite thosh-t3dist
+      a2ensite typomachine
       # @todo https://
 
-      echo "${marker}### adding user t3dist, groups: www-data"
-      useradd -G www-data -m -s /bin/bash t3dist
+      echo "${marker}### adding user typomachine, groups: www-data"
+      useradd -G www-data -m -s /bin/bash typomachine
 
-      echo "${marker}### setting password to t3dist"
-      echo "t3dist:t3dist" | chpasswd
+      echo "${marker}### setting password to typomachine"
+      echo "typomachine:typomachine" | chpasswd
 
-      echo "${marker}### adding user dev, groups: vagrant, admin, www-data, t3dist"
-      useradd -G vagrant,admin,www-data,t3dist -m -s /bin/bash dev
+      echo "${marker}### adding user dev, groups: vagrant, admin, www-data, typomachine"
+      useradd -G vagrant,admin,www-data,typomachine -m -s /bin/bash dev
 
       echo "${marker}### setting password to dev"
       echo "dev:dev" | chpasswd
 
-      echo "${marker}### adding groups to existing user vagrant: www-data, dev, t3dist"
-      usermod -a -G www-data,dev,t3dist vagrant
+      echo "${marker}### adding groups to existing user vagrant: www-data, dev, typomachine"
+      usermod -a -G www-data,dev,typomachine vagrant
 
       echo "${marker}### installing mysql using noninteractive mode"
       export DEBIAN_FRONTEND=noninteractive 
@@ -95,15 +95,15 @@ if [ -f $flagInstalled ]
       echo "${marker}### setting password for mysql user root to root"
       mysqladmin -u root password root
 
-      echo "${marker}### creating mysql user t3dist with password t3dist"
-      mysql -uroot -proot -e "CREATE USER 't3dist'@'localhost' IDENTIFIED BY 't3dist'"
+      echo "${marker}### creating mysql user typomachine with password typomachine"
+      mysql -uroot -proot -e "CREATE USER 'typomachine'@'localhost' IDENTIFIED BY 'typomachine'"
 
-      echo "${marker}### creating database t3dist"
-      mysql -uroot -proot -e "CREATE DATABASE t3dist CHARACTER SET utf8 COLLATE utf8_general_ci;"
+      echo "${marker}### creating database typomachine"
+      mysql -uroot -proot -e "CREATE DATABASE typomachine CHARACTER SET utf8 COLLATE utf8_general_ci;"
 
-      echo "${marker}### setting t3dist privileges"
+      echo "${marker}### setting typomachine privileges"
       # @todo check privileges 
-      mysql -uroot -proot -e "GRANT ALL PRIVILEGES ON t3dist . * TO 't3dist'@'localhost'"
+      mysql -uroot -proot -e "GRANT ALL PRIVILEGES ON typomachine . * TO 'typomachine'@'localhost'"
 
       echo "${marker}### flushing privileges"
       mysql -uroot -proot -e "FLUSH PRIVILEGES"

@@ -45,7 +45,7 @@ __Hinweis:__ Diese Projektbeschreibung ist gültig für _OSX_ und _Linux_. Das V
       |
       +-+ vhosts              // Gemeinsamer Ordner: /etc/apache2/sites-available
         |
-        +- thosh-t3dist.conf  // vhost-Konfiguration
+        +- typomachine.conf   // vhost-Konfiguration
 
 
 __Information:__ 
@@ -67,7 +67,7 @@ Dieser "Bauplan" ist unter Versionskontrolle (git).
 - Apache
 - MySQL
 - PHP
-- PhpMyAdmin ([thosh-t3dist.local/phpmyadmin](thosh-t3dist.local/phpmyadmin))
+- PhpMyAdmin ([typomachine.local/phpmyadmin](typomachine.local/phpmyadmin))
 - Typo3 6.2.x LTS
 
 
@@ -99,11 +99,11 @@ Installation unter Verwendung des Setup-Skripts:
    gestartet werden
         /var/www/components/grunt watch
 
-1. die URL thosh-t3dist.local im Browser aufrufen
+1. die URL typomachine.local im Browser aufrufen
 
-1. Step 2: fill in user t3dist with password t3dist
+1. Step 2: fill in user typomachine with password typomachine
 
-1. Step 3: select database t3dist
+1. Step 3: select database typomachine
 
 1. Step 4: create your user with your password
 
@@ -118,8 +118,8 @@ Installation unter Verwendung des Setup-Skripts:
 
 ### Todo
 
-- Distribution-Extension "thosh-t3dist" (evtl. auf bootstrap_package basierend)
-- Git-Versionierung der Typo3-Distribution "thosh-t3dist"
+- Distribution-Extension "typomachine" (evtl. auf bootstrap_package basierend)
+- Git-Versionierung der Typo3-Distribution "typomachine"
 - Git-Versionierung des zu erstellenden Web-Projekts (quasi das Produkt des Vagrant-Projekts)
 - Einsatz von Bower als Paketmanager?
 - Einsatz von Grunt als Taskmanager?
