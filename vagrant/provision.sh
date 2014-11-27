@@ -4,7 +4,7 @@
 startTime=$(date +%s)
 
 # debug marker
-marker="#######################################################################"$'\r\n'
+marker="################################################################"$'\r\n'
 ### !! IMPORTANT !! ############################################################
 # set development false to avoid data loss
 # also set development false on first vm start when developing
@@ -27,7 +27,7 @@ flagInstalled="/home/vagrant/flagInstalled"
 if [ -f $flagInstalled ]
   then
     echo "${marker}### system allready started"
-  #else
+  else
     echo "${marker}### starting project installation"
     # remove linebreak when not developing on vagrant>>
     touch $flagInstalled #<<
@@ -95,13 +95,13 @@ if [ -f $flagInstalled ]
       echo "${marker}### setting password for mysql user root to root"
       mysqladmin -u root password root
 
+      echo "${marker}### creating mysql database typomachine"
+      mysql -uroot -proot -e "CREATE DATABASE typomachine CHARACTER SET utf8 COLLATE utf8_general_ci;"
+
       echo "${marker}### creating mysql user typomachine with password typomachine"
       mysql -uroot -proot -e "CREATE USER 'typomachine'@'localhost' IDENTIFIED BY 'typomachine'"
 
-      echo "${marker}### creating database typomachine"
-      mysql -uroot -proot -e "CREATE DATABASE typomachine CHARACTER SET utf8 COLLATE utf8_general_ci;"
-
-      echo "${marker}### setting typomachine privileges"
+      echo "${marker}### setting mysql user privileges"
       # @todo check privileges 
       mysql -uroot -proot -e "GRANT ALL PRIVILEGES ON typomachine . * TO 'typomachine'@'localhost'"
 
