@@ -1,5 +1,4 @@
 #!/bin/bash
-echo "Vagrant-Projekt wird erstellt"
 
 # @todo Testen, ob Vagrant installiert ist, sonst Abbruch mit Fehlermeldung
 #echo "Vagrant-Verfügbarkeit prüfen"
@@ -11,14 +10,19 @@ echo "Vagrant-Projekt wird erstellt"
 
 # In Vagrant-Root-Verzeichnis wechseln
 cd vagrant
-echo " _   _               _           _   _____     _ _     _   "
-echo "| |_| |__   ___  ___| |__       | |_|___ /  __| (_)___| |_ "
-echo "| __| '_ \ / _ \/ __| '_ \ _____| __| |_ \ / _\` | / __| __|"
-echo "| |_| | | | (_) \__ \ | | |_____| |_ ___) | (_| | \__ \ |_ "
-echo " \__|_| |_|\___/|___/_| |_|      \__|____/ \__,_|_|___/\__|"
-echo ""
+echo "                                                                ";
+echo "   __                                         __    _           ";
+echo "  / /___  ______  ____  ____ ___  ____ ______/ /_  (_)___  ___  ";
+echo " / __/ / / / __ \/ __ \/ __ \`__ \/ __ \`/ ___/ __ \/ / __ \/ _ \ ";
+echo "/ /_/ /_/ / /_/ / /_/ / / / / / / /_/ / /__/ / / / / / / /  __/ ";
+echo "\__/\__, / .___/\____/_/ /_/ /_/\__,_/\___/_/ /_/_/_/ /_/\___/  ";
+echo "   /____/_/                                                     ";
+
+
+echo ${headline}
+
 # Funktions-Auswahl
-PS3='Was möchtest du tun? (Enter für Menü) '
+PS3='What to do now? (Enter for menu) '
 options=(
   "Abbrechen"
   "SSH-Zugang - ssh"
