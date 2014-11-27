@@ -57,11 +57,15 @@ if [ -f $flagInstalled ]
       echo "${marker}### installing nodejs packages"
       npm install
 
-      echo "installing bower packages" 
-      sudo -H -u vagrant bower install
+      echo "${marker}### installing git"
+      apt-get install -y git
 
-      #echo "${marker}### installing git"
-      #apt-get install -y git
+      echo "${marker}###  installing bower packages" 
+      ls -lah
+      sudo -H -u vagrant whoami
+      sudo -H -u vagrant groups
+      sudo -H -u vagrant id
+      sudo -H -u vagrant bower install
 
       echo "${marker}### installing apache2"
       apt-get install -y apache2
