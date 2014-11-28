@@ -44,14 +44,17 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   ### Provisioning
 
-  # Adding Bootstrap for automated installation on first Start
+  # Run script provision.sh on "up" and "provision"
   config.vm.provision :shell,
     path:   "provision.sh" 
   
-  # Adding Script afterBoot.sh to be run on each System Start
+  # Run script afterBoot.sh on each system start
   config.vm.provision "shell", 
     path:   "afterBoot.sh", 
     run:    "always"
+
+
+
 
 
   # Disable automatic box update checking. If you disable this, then
