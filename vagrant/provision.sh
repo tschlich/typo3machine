@@ -147,7 +147,7 @@ if [ -d typo3_src-6.2.6 ]
 
 fi # /-d typo3_src-6.2.6
 
-echo "${marker}### creating symlinks"
+echo "${marker}| creating symlinks"
 cd /var/www/html
 ln -s ../typo3_src-6.2.* typo3_src
 ln -s typo3_src/index.php index.php
