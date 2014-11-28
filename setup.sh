@@ -24,42 +24,46 @@ echo ${headline}
 # Funktions-Auswahl
 PS3='What to do now? (Enter for menu) '
 options=(
-  "Abbrechen"
-  "SSH-Zugang - ssh"
-  "VM starten - up"
-  "VM neustarten - reload"
-  "VM aktualisieren - provision"
-  "VM beenden - halt"
-#  "VM pausieren - suspend"
-  "VM löschen - destroy"
+  "Cancel"
+  "SSH Login   - vagrant ssh"
+  "Start VM    - vagrant up"
+  "Restart VM  - vagrant reload"
+  "Shutdown VM - vagrant halt"
+  "Rebuild VM  - vagrant provision (discard local changes)"
+  "Destroy VM  - vagrant destroy"
 )
+
 select opt in "${options[@]}"
 do
-    case $opt in
-        "Abbrechen")
-            break
-            ;;
-        "SSH-Zugang - ssh")
-            vagrant ssh
-            ;;
-        "VM starten - up")
-            vagrant up
-            ;;
-        "VM neustarten - reload")
-            vagrant reload
-            ;;
-        "VM aktualisieren - provision")
-            vagrant provision
-            ;;
-        "VM beenden - halt")
-            vagrant halt
-            ;;
- #       "VM pausieren - suspend")
- #           vagrant suspend
- #           ;;
-        "VM löschen - destroy")
-            vagrant destroy
-            ;;
-        *) echo "Ungültige Eingabe";;
+  case $opt in
+    ${options[0]})
+      # Cancel
+      break
+      ;;
+    ${options[1]})
+      # ssh
+      vagrant ssh
+      ;;
+    ${options[2]})
+      # up
+      vagrant up
+      ;;
+    ${options[3]})
+      # reload
+      vagrant reload
+      ;;
+    ${options[4]})
+      # halt
+      vagrant halt
+      ;;
+    ${options[5]})
+      # provision
+      vagrant provision
+      ;;
+    ${options[6]})
+      # destroy
+      vagrant destroy
+      ;;
+    *) echo "Action unknown";;
     esac
 done
