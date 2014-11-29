@@ -4,8 +4,6 @@
 
 # Apache2 is getting Started before Shared Folders are Mounted by Vagrant
 # Simply starts the Apache2 after the init Booting is done.
-# Runs on every Boot
-apache2ctl start
 # avoid ubuntu error bug: stdin: is not a tty
 sed -i 's/^mesg n$/tty -s \&\& mesg n/g' /root/.profile
 
