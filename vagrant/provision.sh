@@ -47,6 +47,9 @@ apt-get install -y apache2
 echo "${marker} removing html dummy"
 rm /var/www/html/index.html
 
+# enable mode rewrite (mod_rewrite)
+sudo a2enmod rewrite
+
 # By adding a line here you can enable any configuration file located in
 # the vhosts folder belonging to your project.
 echo "${marker} enabling vhost"
