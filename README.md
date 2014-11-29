@@ -112,7 +112,7 @@ Installation unter Verwendung des Setup-Skripts:
 
 1. install german translations
 
-1. 
+1. you better do a git init inside typo3_conf and commit now
 
 1. 
 
