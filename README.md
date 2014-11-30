@@ -1,46 +1,49 @@
-# Web-Entwicklung mit Vagrant
-@todo Dieses Vagrant-Projekt erstellt eine VM mit vorinstalliertem TYPO3 inkl. 
-der Erweiterung bootstrap_package. 
+# Vagrant project for TYPO3 development
 
-## Voraussetzungen
-Diese Programme müssen installiert sein und funktionieren:
+Using this Vagrant configuration you will get a working lamp environment
+ready for run through the TYPO3 installation wizard.
+
+## Requirements
+
+Those programs have to be installed and work proper.
 
 - [__Virtualbox__](https://www.virtualbox.org)
 - [__Vagrant__](https://www.vagrantup.com)
 
-__Hinweis:__ Diese Projektbeschreibung ist gültig für _OSX_ und _Linux_. 
-Das Vagrant-Projekt selbst sollte aber auch unter _Windows_ eingesetzt werden können.
-Es muss dann allerdings auf die setup.sh verzichtet werden.
+__Hint:__ This manual works for _OS X_ and _Linux_. The vagrant project
+should also run within Windows, but you can't use the setup.sh then.
 
-## Projektdateien
+## Project files
 
-    + WebEntwicklung/         // Projekt-Verzeichnis 
+    + myProject/              // project folder on your host system 
     |
-    +- .git/                  // Git-Versionskontrolle
+    +- .git/                  // version control system
     |
-    +- .gitignore             // von Git zu ignorierende Dateien
+    +- .gitignore             // files to be ignoriered by version control system
     |
-    |- README.md              // Projekt-Informationen (diese Datei)
+    |-+ components            // sync folder: /var/www/components
+    | |
+    | +- bower.json           // bower setup file
+    | |
+    | +- Gruntfile.js         // grunt setup file
+    | |
+    | +- package.json         // nodejs setup file
     |
-    |- setup.sh               // Shell-Skript zum Einrichten des Projekts
+    |- README.md              // project information (this file)
     |
-    +-+ vagrant/              // Vagrant-Verzeichnis
+    |- setup.sh               // shell script to run the project
+    |
+    +-+ vagrant/              // vagrant folder (synced with /vagrant)
+    | |
+    | +- afterBootstrap.sh    // runs on every system start
+    | |
+    | +- provision.sh         // runs on first "vagrant up" and every "vagrant provision"
+    | |
+    | +- Vagrantfile          // vagrant configuration file
+    |
+    +-+ vhosts                // sync folder: /etc/apache2/sites-available
       |
-      |- afterBootstrap.sh    // Aktionen nach jedem Systemboot
-      |
-      |- bootstrap.sh         // Aktionen nach dem 1. Systemboot oder "vagrant provision"
-      |
-      |-+ components          // sync folder: /var/www/components (so you can browse data on host os)
-      | |
-      | +- bower.json         // bower setup file
-      | |
-      | +- package.json       // nodejs setup file
-      |
-      |- Vagrantfile          // Der Bauplan der VM
-      |
-      +-+ vhosts              // Gemeinsamer Ordner: /etc/apache2/sites-available
-        |
-        +- typomachine.conf   // vhost-Konfiguration
+      +- typomachine.conf     // vhost configuration file
 
 
 __Information:__ 
@@ -55,9 +58,8 @@ For a complete uninstall after _vagrant destroy_ remove following files:
  * vagrant/vhosts/000-default.conf
  * vagrant/vhosts/default-ssl.conf
 
-Dieser "Bauplan" ist unter Versionskontrolle (git).
+## Infrastructure
 
-## Infrastruktur
 - Linux Ubuntu Server 14.04 LTS (ubuntu/trusty64)
 - Apache
 - MySQL
@@ -68,88 +70,67 @@ Dieser "Bauplan" ist unter Versionskontrolle (git).
 
 ## Installation
 
-Wer Vagrant kennt, kann auf das Setup-Skript verzichten. 
-Das Skript stellt sicher, daß auf dem Host die box _ubuntu/trusty64_ 
-verfügbar ist, wechselt in das Verzeichnis _vagrant_ und stellt 
-ein Menü der Vagrant-Befehle zur Verfügung.
+You don't have to use the setup script. The script looks for the base system
+and provides the vagrant commands as a menu.
 
-Installation unter Verwendung des Setup-Skripts:
+Installation using the setup script:
 
-1. Dieses Verzeichnis im Terminal öffnen
+1. Open project folder in your terminal
 
-        cd /pfad/zum/ziel
+        cd /path/to/target
     
-1. Das Setup-Skript starten 
+1. Start setup script
 
         ./setup.sh
 
-1. "VM starten - up" auswählen und warten
+1. Select "Start VM"
 
-1. "SSH-Zugang - ssh" auswählen
+1. Select "SSH Login"
 
-1. Typo3 erfordert für die Installation die Datei FIRST_INSTALL im webroot
+1. Create file FIRST_INSTALL in web root
         touch /var/www/html/FIRST_INSTALL
 
-1. Sofern HTML-Templates oder LESS-Dateien geändert werden sollen, muss grunt
-   gestartet werden
-        /var/www/components/grunt watch
-
-1. die URL typomachine.local im Browser aufrufen
+1. Open typomachine.local in your web browser to start the installation wizard
 
 1. Step 2: fill in user typomachine with password typomachine
 
 1. Step 3: select database typomachine
 
-1. Step 4: create your user with your password
+1. Step 4: create a user "typomachine" with password "typomachine"
 
-1. Step 5: you can uncheck the box if you want to build your own system
+1. Step 5: you can uncheck the box if you want to build your own system, also ignore the following steps then
 
-1. after login in select "Get Extensions" in the select box at the top 
+1. Login in and select "Get Extensions" in the upper box
 
-1. search for bootstrap_package and install this extension
+1. Search for bootstrap_package and install it by clicking on the brick
 
-1. accept downloading realurl
+1. Accept downloading realurl
 
-1. install german translations
+1. Base install is done, do a git init inside typo3_conf now to control your individual project
 
-1. you better do a git init inside typo3_conf and commit now
+1. Start grunt task if you want to get compiled css and javascript
+        /var/www/components/grunt watch
 
-1. 
+1. Create a new page and set this as root page. Find this option in the page configuration filed under behavior/miscellaneous
 
-1. 
+1. Create a new typoscript Template on this Page
 
-1. 
+        General
+            Template Title: You can name this as you like: Example "Bootstrap Package"
+            Website Title: This will be your website title visible in the frontend
 
-1. 
+        Options
+            Clear Constants and Setup by checking the boxes
+            Use this Template as Root-Level Template by checking the box
 
-1. 
+        Includes
+            Include static (from extensions)
+            CSS Styled Content (required)
+            Default TS form (optional if you want to use it)
+            Bootstrap Package (required)
 
-1. 
-
-1. 
-
-1. 
-
-1. 
-
-1. 
-
-1. 
-
-1. 
-
-
+1. You can build your site structure now and configure your project by editing the files located on your host system _myProject/htdocs/typo3conf/ext/bootstrap_package_ __Updating bootstrap_package extension is not recommended!__
 
 
 ### Todo
 
-- Distribution-Extension "typomachine" (evtl. auf bootstrap_package basierend)
-- Git-Versionierung der Typo3-Distribution "typomachine"
-- Git-Versionierung des zu erstellenden Web-Projekts (quasi das Produkt des Vagrant-Projekts)
-- Einsatz von Bower als Paketmanager?
-- Einsatz von Grunt als Taskmanager?
-- LESS / SASS
-- jQuery
-- bootstrap
-- nodeJS
-- Checken: chef, puppet, Capistrano, ...
