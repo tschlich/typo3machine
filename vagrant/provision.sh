@@ -26,20 +26,17 @@ sudo apt-get install -y nodejs
 # The nodejs package contains nodejs and npm
 # for some npm packages to work (such as those that require building from source),
 # build-essentials package will be installed
-###echo "${marker} installing build-essential"
-###sudo apt-get install -y build-essential
+echo "${marker} installing build-essential"
+sudo apt-get install -y build-essential
 
-###echo "${marker} installing bower global"
-###npm install -g bower
+echo "${marker} installing bower"
+sudo npm install -g bower
 
-###echo "${marker} installing grunt global"
-###npm install -g grunt-cli
+echo "${marker} installing grunt global"
+sudo npm install -g grunt-cli
 
-###echo "${marker} installing nodejs packages"
-###npm install
-
-###echo "${marker}installing git"
-###apt-get install -y git
+echo "${marker} installing git"
+apt-get install -y git
 
 echo "${marker} installing apache2"
 apt-get install -y apache2
