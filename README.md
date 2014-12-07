@@ -8,7 +8,7 @@ ready for run through the TYPO3 installation wizard.
 Those programs have to be installed and work proper.
 
 - [__Virtualbox__](https://www.virtualbox.org)
-- [__Vagrant__](https://www.vagrantup.com)
+- [__Vagrant__](https://www.vagrantup.com)  >= 1.5
 
 __Hint:__ This manual works for _OS X_ and _Linux_. The vagrant project
 should also run within Windows, but you can't use the setup.sh then.
