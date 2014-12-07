@@ -20,8 +20,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   end
 
   ## Network Configuration
-  config.vm.network :private_network, ip: '192.168.23.23'
-  config.vm.network "forwarded_port", guest: 35729, host: 35729
+  config.vm.network :private_network, ip: '192.168.23.24'
+  config.vm.network "forwarded_port", guest: 35729, host: 2424
   
   ## Sync Folder Configuration 
   config.vm.synced_folder "../vhosts/", "/etc/apache2/sites-available",
@@ -34,14 +34,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     owner:  "www-data", 
     group:  "www-data", 
     mount_options: ["dmode=775,fmode=664"]
-
-  # vm will install components on host os for debugging reasons
-  config.vm.synced_folder "../components/", "/var/www/components",
-    create: true, 
-    owner:  "www-data", 
-    group:  "www-data", 
-    mount_options: ["dmode=775,fmode=664"]
-
+      
 
   ### Provisioning
 
