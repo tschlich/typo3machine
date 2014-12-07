@@ -21,21 +21,13 @@ should also run within Windows, but you can't use the setup.sh then.
     |
     +- .gitignore             // files to be ignoriered by version control system
     |
-    |-+ components            // sync folder: /var/www/components
-    | |
-    | +- bower.json           // bower setup file
-    | |
-    | +- Gruntfile.js         // grunt setup file
-    | |
-    | +- package.json         // nodejs setup file
-    |
     |- README.md              // project information (this file)
     |
     |- setup.sh               // shell script to run the project
     |
     +-+ vagrant/              // vagrant folder (synced with /vagrant)
     | |
-    | +- afterBootstrap.sh    // runs on every system start
+    | +- afterBoot.sh         // runs on every system start
     | |
     | +- provision.sh         // runs on first "vagrant up" and every "vagrant provision"
     | |
@@ -69,11 +61,6 @@ For a complete uninstall after _vagrant destroy_ remove following files:
 
 
 ## Installation
-
-You don't have to use the setup script. The script looks for the base system
-and provides the vagrant commands as a menu.
-
-Installation using the setup script:
 
 1. Open project folder in your terminal
 
