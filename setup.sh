@@ -1,14 +1,8 @@
 #!/bin/bash
 
-# @todo Testen, ob Vagrant installiert ist, sonst Abbruch mit Fehlermeldung
-#echo "Vagrant-Verfügbarkeit prüfen"
+echo "Adding vagrant box ubuntu/trusty64 if not present"
+vagrant box add ubuntu/trusty64
 
-#@todo uncomment
-# Basissystem auf dem Host bereitstellen 
-#echo "Bereitstellen des Grundsystems"
-#vagrant box add ubuntu/trusty64
-
-# In Vagrant-Root-Verzeichnis wechseln
 cd vagrant
 
 echo "   __                   _____                      __    _          ";
@@ -17,7 +11,7 @@ echo " / __/ / / / __ \/ __ \ /_ </ __ \`__ \/ __ \`/ ___/ __ \/ / __ \/ _ \ ";
 echo "/ /_/ /_/ / /_/ / /_/ /__/ / / / / / / /_/ / /__/ / / / / / / /  __/";
 echo "\__/\__, / .___/\____/____/_/ /_/ /_/\__,_/\___/_/ /_/_/_/ /_/\___/ ";
 echo "   /____/_/                                                         ";
-
+echo " ";
 # Funktions-Auswahl
 PS3='What to do now? (Enter for menu) '
 options=(
