@@ -24,8 +24,10 @@ apache2ctl start
 
 
 ### Begin Testing ##############################################################
-
-
+NOW=$(date +"%Y-%m-%d_%H-%M-%S")
+BUFILE="DB_$NOW.sql"
+echo "${marker} Creating database backup: mysql_backups/$BUFILE.sql";
+mysqldump -u typomachine -ptypomachine typomachine > mysql_backups/$BUFILE 
 
 
 ### End Testing ################################################################
