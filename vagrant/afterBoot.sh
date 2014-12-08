@@ -21,10 +21,20 @@ echo "${marker} running afterBoot.sh"
 echo "${marker} start apache2"
 apache2ctl start
 
+BUFOLDER=MySQL_Backups;
+if [ -d $BUFOLDER ]
+  then
+    NOW=$(date +"%Y-%m-%d_%H-%M-%S")
+    BUFILE="DB_$NOW.sql"
+    echo "${marker} Creating database backup: $BUFOLDER/$BUFILE";
+    mysqldump -u typomachine -ptypomachine typomachine > $BUFOLDER/$BUFILE 
+  else
+    echo "${marker} Creating database backup folder: $BUFOLDER";
+    mkdir $BUFOLDER
+fi # /-d $BUFOLDER
 
 
 ### Begin Testing ##############################################################
-
 
 
 
