@@ -4,3 +4,4 @@ components/typo3_src*/
 htdocs/
 vhosts/000-default.conf
 vhosts/default-ssl.conf
+vagrant/.vagrant
