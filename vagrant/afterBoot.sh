@@ -21,7 +21,7 @@ echo "${marker} running afterBoot.sh"
 echo "${marker} start apache2"
 apache2ctl start
 
-BUFOLDER=MySQL_Backups;
+BUFOLDER=/vagrant/MySQL_Backups;
 if [ -d $BUFOLDER ]
   then
     NOW=$(date +"%Y-%m-%d_%H-%M-%S")
@@ -33,20 +33,9 @@ if [ -d $BUFOLDER ]
     mkdir $BUFOLDER
 fi # /-d $BUFOLDER
 
-
-### Begin Testing ##############################################################
-
-
-
-### End Testing ################################################################
-
-
-
-
-
-
-
-
+# Start grunt default task to watch for changes on lesscss files
+cd /var/www/html/typo3conf/ext/typo_paradise/Resources/Private/
+grunt
 
 # show execution time
 finishTime=$(date +%s)
