@@ -5,3 +5,4 @@ htdocs/
 vhosts/000-default.conf
 vhosts/default-ssl.conf
 vagrant/.vagrant
+vagrant/MySQL_Backups
