@@ -33,10 +33,6 @@ if [ -d $BUFOLDER ]
     mkdir $BUFOLDER
 fi # /-d $BUFOLDER
 
-# Start grunt default task to watch for changes on lesscss files
-cd /var/www/html/typo3conf/ext/typo_paradise/Resources/Private/
-grunt
-
 # show execution time
 finishTime=$(date +%s)
 executionTimeSec=$((finishTime - startTime))
