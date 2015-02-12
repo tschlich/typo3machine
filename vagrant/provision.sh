@@ -15,9 +15,6 @@ marker="+ - - - - - - - - - - - - - - - - - - - - - - - - - - - - "$'\r\n|'
 
 echo "${marker} running provision.sh"
 
-echo "| go to folder /var/www/components"
-cd /var/www/components
-
 echo "| updating apt sources and installing nodejs"
 # adding PPA in order to get access to its contents
 curl -sL https://deb.nodesource.com/setup | sudo bash -
