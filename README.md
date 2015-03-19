@@ -75,6 +75,7 @@ For a complete uninstall after _vagrant destroy_ remove following files:
 1. Select "SSH Login"
 
 1. Create file FIRST_INSTALL in web root
+ 
         touch /var/www/html/FIRST_INSTALL
 
 1. Open typomachine.local in your web browser to start the installation wizard
