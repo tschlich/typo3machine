@@ -90,6 +90,7 @@ apt-get install -y php5
 apt-get install -y php5-mysql
 # @todo phpmyadmin reports error
 apt-get install -y php5-mcrypt
+php5enmod mcrypt
 #apt-get install -y libapache2-mod-auth-mysql
 #apt-get install -y php5-gd 
 #apt-get install -y php-apc
