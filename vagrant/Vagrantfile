@@ -20,8 +20,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   end
 
   ## Network Configuration
-  config.vm.network :private_network, ip: '192.168.23.24'
-  config.vm.network "forwarded_port", guest: 35729, host: 2424
+  config.vm.network :private_network, ip: '192.168.23.23'
+  config.vm.network "forwarded_port", guest: 35729, host: 2323
   
   ## Sync Folder Configuration 
   config.vm.synced_folder "../vhosts/", "/etc/apache2/sites-available",
