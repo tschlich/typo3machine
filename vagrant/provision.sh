@@ -35,6 +35,10 @@ sudo npm install -g grunt-cli
 echo "${marker} installing git"
 apt-get install -y git
 
+git config --global user.email "you@example.com"
+git config --global user.name "Your Name"
+
+
 echo "${marker} installing apache2"
 apt-get install -y apache2
 
