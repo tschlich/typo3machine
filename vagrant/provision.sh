@@ -38,6 +38,7 @@ apt-get install -y git
 git config --global user.email "you@example.com"
 git config --global user.name "Your Name"
 git config --global alias.st status
+git config --global core.filemode false
 
 echo "${marker} installing apache2"
 apt-get install -y apache2
