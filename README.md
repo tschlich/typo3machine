@@ -1,7 +1,7 @@
 # Vagrant project for TYPO3 development
 
 Using this Vagrant configuration you will get a working lamp environment
-ready for run through the TYPO3 installation wizard.
+ready to run through the TYPO3 installation wizard.
 
 ## Requirements
 
