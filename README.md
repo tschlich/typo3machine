@@ -78,6 +78,12 @@ For a complete uninstall after _vagrant destroy_ remove following files:
  
         touch /var/www/html/FIRST_INSTALL
 
+1. Add this line to your hosts file (/etc/hosts)
+
+        192.168.23.23   typomachine.local
+        
+    If you want to use another IP you have to configure it in vagrant/Vagrantfile.
+
 1. Open typomachine.local in your web browser to start the installation wizard
 
 1. Step 2: fill in user typomachine with password typomachine
