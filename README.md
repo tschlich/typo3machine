@@ -68,7 +68,9 @@ For a complete uninstall after _vagrant destroy_ remove following files:
     
 1. Start setup script
 
-        ./setup.sh
+        sh ./setup.sh
+        # if it results in an syntax error, try:
+        bash ./setup.sh
 
 1. Select "Start VM"
 
