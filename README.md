@@ -125,8 +125,5 @@ For a complete uninstall after _vagrant destroy_ remove following files:
             Default TS form (optional if you want to use it)
             Bootstrap Package (required)
 
-1. You can build your site structure now and configure your project by editing the files located on your host system _myProject/htdocs/typo3conf/ext/bootstrap_package_ __Updating bootstrap_package extension is not recommended!__
-
-
-### Todo
+1. You can build your site structure now and configure your project by editing the files located on your host system _myProject/htdocs/typo3conf/ext/bootstrap_package_ __Updating bootstrap_package extension is not recommended in this setup!__ Better create your own extension if you want to work serious.
 
