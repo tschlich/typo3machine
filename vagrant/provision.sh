@@ -108,7 +108,10 @@ echo "${marker} modifying php.ini"
 upload_max_filesize=10M
 post_max_size=10M
 max_execution_time=240
-for key in upload_max_filesize post_max_size max_execution_time
+always_populate_raw_post_data=-1
+max_input_vars=1500
+
+for key in upload_max_filesize post_max_size max_execution_time always_populate_raw_post_data max_input_vars
 do
  sudo sed -i "s/^\($key\).*/\1 $(eval echo = \${$key})/" /etc/php5/apache2/php.ini
 done
@@ -130,40 +133,18 @@ echo 'phpmyadmin phpmyadmin/reconfigure-webserver multiselect apache2' | debconf
 # Install phpmyadmin with noninteractive mode (it will use the set settings)
 apt-get install -q -y phpmyadmin
 
+# Download TYPO3 Source and unpack it
 echo "${marker} installing typo3"
-cd /var/www
-if [ -d typo3_src-6.2.6 ]
-  then
-    echo "| sourcecode already exists, no action"
-    # @todo check md5
-  else
-    if [ -f 6.2 ]
-      then
-        echo "| tarball already exists"
-      else
-        echo "| downnloading tarball (current 6.2.x) ..."
-        wget -q http://get.typo3.org/6.2
-    fi # /-f 6.2
-
-    echo "| unpacking tarball ..."
-    tar -xzf 6.2
-
-###    echo "| deleting tarball"
-###    rm 6.2
-
-fi # /-d typo3_src-6.2.6
+cd /opt/
+wget get.typo3.org/7 --content-disposition --quiet
+tar -xzf typo3_src-7.6.*
 
 echo "${marker}| creating symlinks"
 cd /var/www/html
-ln -s ../typo3_src-6.2.* typo3_src
+ln -s /opt/typo3_src-7.6.11 typo3_src
 ln -s typo3_src/index.php index.php
 ln -s typo3_src/typo3 typo3
 
-
-
-#https://gist.github.com/NamelessCoder/8714035
-#cd /var/www
-#git clone https://github.com/TYPO3/TYPO3.CMS.git --depth 1 typo3source
 
 #echo "${marker}Open the TYPO3 backend typomachine.local and complete the install wizard"
 #echo "Remember: You must add the _cli_lowlevel backend user!"
