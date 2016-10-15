@@ -28,9 +28,9 @@ marker="+ - - - - - - - - - - - - - - - - - - - - - - - - - - - - "$'\r\n|'
 
 echo "${marker} running provision.sh"
 
-echo "| updating apt sources and installing nodejs"
+echo "| updating apt sources and installing Node.js v4 (LTS Argon)"
 # adding PPA in order to get access to its contents
-curl -sL https://deb.nodesource.com/setup | sudo bash -
+curl -sL https://deb.nodesource.com/setup_4.x | sudo bash -
 sudo apt-get install -y nodejs
 
 # The nodejs package contains nodejs and npm
