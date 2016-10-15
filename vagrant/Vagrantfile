@@ -14,9 +14,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   ## Hardware Settings
   config.vm.provider "virtualbox" do |v|
     # RAM
-    v.customize ["modifyvm", :id, "--memory", 2048]
+    v.customize ["modifyvm", :id, "--memory", 512]
     # CPU Cores
-    v.customize ["modifyvm", :id, "--cpus", 2]
+    v.customize ["modifyvm", :id, "--cpus", 1]
   end
 
   ## Network Configuration
