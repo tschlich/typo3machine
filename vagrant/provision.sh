@@ -128,6 +128,8 @@ for key in upload_max_filesize post_max_size max_execution_time always_populate_
 do
  sudo sed -i "s/^\($key\).*/\1 $(eval echo = \${$key})/" /etc/php5/apache2/php.ini
 done
+echo "<?php phpinfo() ?>" >> /var/www/html/info.php
+
 
 echo "${marker} restarting apache"
 apache2ctl restart
