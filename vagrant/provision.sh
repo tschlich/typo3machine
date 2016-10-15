@@ -129,7 +129,7 @@ max_execution_time=240
 always_populate_raw_post_data=-1
 max_input_vars=1500
 
-// @todo add error handling settings (display_errors)
+# @todo add error handling settings (display_errors)
 
 for key in upload_max_filesize post_max_size max_execution_time always_populate_raw_post_data max_input_vars
 do
