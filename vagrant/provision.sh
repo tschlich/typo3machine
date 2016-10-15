@@ -118,18 +118,24 @@ php5enmod mcrypt
 #apt-get install -y php-pear
 
 echo "${marker} modifying php.ini"
+
+# uncomment max_input_vars
+sudo sed -i -e "/max_input_vars/ s/^;\s*//" /etc/php5/apache2/php.ini
+
+# change values
 upload_max_filesize=10M
 post_max_size=10M
 max_execution_time=240
 always_populate_raw_post_data=-1
 max_input_vars=1500
 
+// @todo add error handling settings (display_errors)
+
 for key in upload_max_filesize post_max_size max_execution_time always_populate_raw_post_data max_input_vars
 do
- sudo sed -i "s/^\($key\).*/\1 $(eval echo = \${$key})/" /etc/php5/apache2/php.ini
+  sudo sed -i "s/^\($key\).*/\1 $(eval echo = \${$key})/" /etc/php5/apache2/php.ini
 done
 echo "<?php phpinfo() ?>" >> /var/www/html/info.php
-
 
 echo "${marker} restarting apache"
 apache2ctl restart
