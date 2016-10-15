@@ -4,6 +4,19 @@
 # - vagrant up (only the first time or after destroying the virtual machine)
 # - vagrant provision
 
+# fetch parameters
+if [[ -z $1 ]]; then
+    git_user_name="DEFAULT NAME"
+else
+    git_user_name="$1"
+fi
+
+if [[ -z $2 ]]; then
+    git_user_email="DEFAULT-EMAIL@example.conf"
+else
+    git_user_email="$2"
+fi
+
 # avoid ubuntu error bug: stdin: is not a tty
 sed -i 's/^mesg n$/tty -s \&\& mesg n/g' /root/.profile
 
@@ -35,10 +48,10 @@ sudo npm install -g grunt-cli
 echo "${marker} installing git"
 apt-get install -y git
 
-git config --global user.email "you@example.com"
-git config --global user.name "Your Name"
-git config --global alias.st status
-git config --global core.filemode false
+su - vagrant -c "git config --global user.email ${git_user_email}"
+su - vagrant -c "git config --global user.name '${git_user_name}'"
+su - vagrant -c "git config --global alias.st status"
+su - vagrant -c "git config --global core.filemode false"
 
 echo "${marker} installing apache2"
 apt-get install -y apache2
