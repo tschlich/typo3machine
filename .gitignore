@@ -1,10 +1,17 @@
-components/bower_components
-components/node_modules/
-components/typo3_src*/
+bower_components/
+node_modules/
+
 htdocs/
+
 vhosts/000-default.conf
 vhosts/default-ssl.conf
+
 vagrant/.vagrant
 vagrant/MySQL_Backups
+vagrant/typo3_src*/
+
+.idea/
+nbproject/
 *.komodoproject
 
+*.tar.gz
