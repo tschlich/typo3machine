@@ -2,6 +2,7 @@ bower_components/
 node_modules/
 
 htdocs/
+scripts/
 
 vhosts/000-default.conf
 vhosts/default-ssl.conf
